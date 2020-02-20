@@ -13,5 +13,5 @@ Cette liste est à compléter.
 ## Présentation générale
 
  - https://en.wikipedia.org/wiki/Eigenface
-
+ - [TP-ESIR-Eigenface.pdf](./TP-ESIR-Eigenface.pdf )
  
