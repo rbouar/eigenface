@@ -1,17 +1,37 @@
-﻿# Ressources pour Eigenface
-Cette liste est à compléter.
+# Eigenface
 
 ## Articles de recherche
 
  - https://www.mitpressjournals.org/doi/abs/10.1162/jocn.1991.3.1.71
 
+## Présentation générale
+
+ - https://en.wikipedia.org/wiki/Eigenface
+ - http://www.scholarpedia.org/article/Eigenfaces
+ - http://jmcspot.com/Eigenface/
+
 ## TP
 
  - https://github.com/msilanus/faceReco
  - http://cours-info.iut-bm.univ-fcomte.fr/wiki/pmwiki.php/TP/EigenFaces
-
-## Présentation générale
-
- - https://en.wikipedia.org/wiki/Eigenface
  - [TP-ESIR-Eigenface.pdf](./TP-ESIR-Eigenface.pdf )
+
+# Matrice de covariance
+## Présentation générale
+ - https://fr.wikipedia.org/wiki/Covariance
+
+# Analyse en composantes principales
+## Présentation générale 
+ - https://fr.wikipedia.org/wiki/Analyse_en_composantes_principales
+ 
+ 
+
+ 
+
+# Décomposition en valeurs singulière
+## Présentation générale
+https://fr.wikipedia.org/wiki/D%C3%A9composition_en_valeurs_singuli%C3%A8res
+
+ 
+ 
  
