@@ -10,5 +10,6 @@ REPORTPDF=target/eigenfaces-text.pdf
 
 
 report:
+	mkdir -p $(TARGET)
 	$(TOPDF) $(OPT) $(TARGET) $(REPORTTEXT)
 	cp $(REPORTPDF) .
