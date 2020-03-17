@@ -1,14 +1,15 @@
 \documentclass[12pt,french]{article}
 
 \usepackage{amssymb}
+\usepackage{amsmath}
 \usepackage{babel}
 
 \title{Eigenfaces}
 \author{
-Bouarah Romain \and
-Langdorph Matthieu \and
-Ketels Lucas \and
-Souffan Nathan
+  Bouarah Romain \and
+  Langdorph Matthieu \and
+  Ketels Lucas \and
+  Souffan Nathan
 }
 
 
@@ -24,6 +25,25 @@ Souffan Nathan
 \subsection{Travail dans $\mathbb{R}^{N \times N}$}
 Considérons une image de visage comme une matrice $N \times N$ dont le coefficient $(i,j)$ est égal au niveau de gris du pixel $(i,j)$ (l'origine se situant dans le coin haut gauche).  
 On transforme ensuite cette matrice comme un vecteur de $\mathbb{R}^{N \times N}$ en juxtaposant les colonnes l'une en dessous de l'autre, par exemple.
+\[  
+  \begin{pmatrix}
+    p_{1,1} & p_{1,2} & \cdots & p_{1,N} \\
+    p_{2,1} & p_{2,2} & \cdots & p_{2,N} \\
+    \vdots  & \vdots  & \ddots & \vdots  \\
+    p_{N,1} & p_{N,2} & \cdots & p_{N,N} 
+  \end{pmatrix}
+  \rightarrow
+  \begin{pmatrix}
+    p_{1,1} \\
+    p_{2,1} \\
+    \vdots \\
+    p_{N,1} \\
+    \vdots \\
+    p_{1,N} \\
+    \vdots \\
+    p_{N,N} 
+  \end{pmatrix}
+\]
 
 \subsection{Calcul des valeurs propres et des vecteurs propres de la matrice de covariance}
 Les images des visages sont globalement similaires, donc ces images ne seront pas distribuées aléatoirement dans notre espace $\mathbb{R}^{N \times N}$.
