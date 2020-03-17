@@ -1,3 +1,8 @@
+\documentclass[12pt,french]{article}
+
+\usepackage{amssymb}
+\usepackage{babel}
+
 \title{Eigenfaces}
 \author{
 Bouarah Romain \and
@@ -5,25 +10,26 @@ Langdorph Matthieu \and
 Ketels Lucas \and
 Souffan Nathan
 }
-\documentclass[12pt]{article}
-\usepackage{amssymb}
+
+
 \begin{document}
 \maketitle
 \newpage
-\section{Partie Mathématiques}
-\subsection{Calcul des Eigenfaces}
-\subsubsection{Travail dans $\mathbb{R}^{N \times N}$}
+
+\part{Partie Mathématiques}
+\section{Calcul des Eigenfaces}
+\subsection{Travail dans $\mathbb{R}^{N \times N}$}
 Considérons une image de visage comme une matrice $N \times N$ dont le coefficient $(i,j)$ est égal au niveau de gris du pixel $(i,j)$ (l'origine se situant dans le coin haut gauche).  
 On transforme ensuite cette matrice comme un vecteur de $\mathbb{R}^{N \times N}$ en juxtaposant les colonnes l'une en dessous de l'autre, par exemple.
-\subsubsection{Calcul des valeurs propres et des vecteurs propres de la matrice de covariance}
+\subsection{Calcul des valeurs propres et des vecteurs propres de la matrice de covariance}
 Les images des visages sont globalement similaires, donc ces images ne seront pas distribuées aléatoirement dans notre espace $\mathbb{R}^{N \times N}$.
 On peut donc décrire notre espace des visages de manière plus fine (\textit{i.e.} avec moins de dimensions).
-\paragraph{Matrice de covariance}
-\paragraph{Méthode 1: Analyse en composantes principales}
-\paragraph{Méthode 2: Décomposition en valeurs singulières}
-\subsection{Utilisation des eigenfaces pour classer une image de visage}
-\subsubsection{Projection dans l'espace des visages}
-\subsubsection{Analyse de la projection}
+\subsubsection{Matrice de covariance}
+\subsubsection{Méthode 1: Analyse en composantes principales}
+\subsubsection{Méthode 2: Décomposition en valeurs singulières}
+\section{Utilisation des eigenfaces pour classer une image de visage}
+\subsection{Projection dans l'espace des visages}
+\subsection{Analyse de la projection}
 
 
 
