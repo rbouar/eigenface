@@ -12,8 +12,11 @@ Souffan Nathan
 \newpage
 \section{Partie Mathématiques}
 \subsection{Calcul des Eigenfaces}
-\subsubsection{Travail dans $\mathbb{R}$}
+\subsubsection{Travail dans $\mathbb{R}^{N \times N}$}
+Considérons une image de visage comme une matrice $N \times N$ dont le coefficient $(i,j)$ est égal au niveau de gris du pixel $(i,j)$ (l'origine se situant dans le coin haut gauche).  
+On transforme ensuite cette matrice comme un vecteur de $\mathbb{R}^{N \times N}$, en juxtaposant les colonnes l'une en dessous de l'autre, par exemple.
 \subsubsection{Calcul des valeurs propres et des vecteurs propres de la matrice de covariance}
+
 \paragraph{Matrice de covariance}
 \paragraph{Méthode 1: Analyse en composantes principales}
 \paragraph{Méthode 2: Décomposition en valeurs singulières}
