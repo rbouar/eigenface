@@ -23,14 +23,14 @@
 \section{Calcul des Eigenfaces}
 
 \subsection{Travail dans $\mathbb{R}^{N \times N}$}
-Considérons une image de visage comme une matrice $N \times N$ dont le coefficient $(i,j)$ est égal au niveau de gris du pixel $(i,j)$ (l'origine se situant dans le coin haut gauche).  
+Considérons une image de visage comme une matrice $N \times N$ dont le coefficient $(i,j)$ est égal au niveau de gris du pixel $(i,j)$ (l'origine se situant dans le coin haut gauche).
 On transforme ensuite cette matrice comme un vecteur de $\mathbb{R}^{N \times N}$ en juxtaposant les colonnes l'une en dessous de l'autre, par exemple.
-\[  
+\[
   \begin{pmatrix}
     p_{1,1} & p_{1,2} & \cdots & p_{1,N} \\
     p_{2,1} & p_{2,2} & \cdots & p_{2,N} \\
     \vdots  & \vdots  & \ddots & \vdots  \\
-    p_{N,1} & p_{N,2} & \cdots & p_{N,N} 
+    p_{N,1} & p_{N,2} & \cdots & p_{N,N}
   \end{pmatrix}
   \rightarrow
   \begin{pmatrix}
@@ -41,7 +41,7 @@ On transforme ensuite cette matrice comme un vecteur de $\mathbb{R}^{N \times N}
     \vdots \\
     p_{1,N} \\
     \vdots \\
-    p_{N,N} 
+    p_{N,N}
   \end{pmatrix}
 \]
 
@@ -59,8 +59,26 @@ La matrice de covariance est $C = \frac{1}{M}\displaystyle\sum_{i=1}^{M} \Phi_i 
 \subsubsection{Méthode 1: Analyse en composantes principales}
 \subsubsection{Méthode 2: Décomposition en valeurs singulières}
 \section{Utilisation des eigenfaces pour classer une image de visage}
+% Les visages calculés avec les vecteurs propres forment un ensemble à l'aide duquel nous pouvons décrire un visage. \\
+% 40 eigenfaces suffisent pour avoir une bonne description de l'ensemble des visages
+\emph{Définir $M'$ comme étant le nombre de visage du training set}\\
+\emph{Définir la base de l'espaces des eigenfaces}
+
 \subsection{Projection dans l'espace des visages}
+Soit $\Gamma$ une nouvelle image de visage, on la projette dans l'espace des visages par:
+$$\omega_k = u_k^T(\Gamma - \Psi)$$
+pour $k = 1,~\dots,~M'$, on obtient ainsi un vecteur $\Omega$ tel que:
+\[\Omega =
+\begin{pmatrix}
+  \omega_1 \\
+  \vdots \\
+  \omega_{M'}
+\end{pmatrix}
+\]
+$\Omega$ décrit la contribution de chacun des eigenfaces pour l'image en question.
+
 \subsection{Analyse de la projection}
+
 
 
 
