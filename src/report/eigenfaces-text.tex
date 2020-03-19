@@ -78,6 +78,19 @@ pour $k = 1,~\dots,~M'$, on obtient ainsi un vecteur $\Omega$ tel que:
 $\Omega$ décrit la contribution de chacun des eigenfaces pour l'image en question.
 
 \subsection{Analyse de la projection}
+On peut maintenant utiliser ce vecteur pour reconnaître si ce vecteur correspond à un visage déjà connue étant dans la base ou si c'est un visage inconnu.
+Pour ce faire, on cherche la classe $k$ qui minimise la distance euclidienne $\epsilon_k = \|(\Omega - \Omega_k)\|^2$
+ où $\Omega_k$ est le vecteur décrivant la $k^{ieme}$ classe de visage. Les classes de visages $\Omega_i$ sont calculés en faisant la moyenne de plusieurs ou une image du visage de chaque individu. \\
+ On considère ensuite qu'un visage appartient à une certaine classe de visage $k$ si le minimum $\epsilon_k$ est en dessous un certain seuil $\Theta$.
+ Si $\forall k,~\epsilon_k > \Theta$, alors le visage est inconnu et on a alors une nouvelle classe de visage. \\
+ Il y a finalement 4 possibilités pour une image:
+\begin{enumerate}
+  \item L'image est proche de l'espace des visages et proche d'une classe de visage en particulier, c'est alors un visage connu
+  \item L'image est proche de l'espace des visages mais n'est proche d'aucune classe de visage, c'est alors un visage inconnu
+  \item L'image est distante de l'espace des visages mais proche d'une classe de visage, \emph{EXPLICATION!!!} C'est la plupart du temps un faux positif.
+  \item L'image est distante de l'espace des images et également distante de toutes les classes de visages, on peut alors en conlcure que ce n'est pas un visage
+\end{enumerate}
+
 
 
 
