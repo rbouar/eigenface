@@ -49,12 +49,20 @@ On transforme ensuite cette matrice comme un vecteur de $\mathbb{R}^{N \times N}
 Les images des visages sont globalement similaires, donc ces images ne seront pas distribuées aléatoirement dans notre espace $\mathbb{R}^{N \times N}$.
 On peut donc décrire notre espace des visages de manière plus fine (\textit{i.e.} avec moins de dimensions).
 
+
 \subsubsection{Matrice de covariance}
-Avant de commencer la réduction de l'espace de travail, nous allons d'abord calculer la matrice de covariance.\\
-Supposons que nous avons $M$ images de visage qu'on note $\Gamma_1,~\Gamma_2,~\dots,~\Gamma_M$. On a $\Psi = \frac{1}{M}\displaystyle\sum_{i=1}^{M} \Gamma_i$ correspondant à la moyenne des visages.
-Chaque visage différe donc de la moyenne par le vecteur $\Phi_i = \Gamma_i - \Psi$.
-\\ \emph{Définir la matrice de covariance}\\
-La matrice de covariance est $C = \frac{1}{M}\displaystyle\sum_{i=1}^{M} \Phi_i \Phi_i^T=AA^T$ où la matrice $A = [\Phi_1 \Phi_2 \dots \Phi_M]$
+Avant de commencer la réduction de l'espace de travail, nous allons d'abord analyser cette dispertion en calculant la matrice de covariance.
+
+Supposons que nous avons $M$ images de visage. On note $I = [I_1~I_2~\dots~I_M]$ la matrice de taille $N^2 \times M$ de l'ensemble de nos images. Normalisons nos images de visages :
+\begin{enumerate}
+\item On calcule le visage moyen $\Psi = \frac{1}{M}\displaystyle\sum_{i=1}^{M} I_i$.
+\item On retire le visage moyen à chacun de nos visages, en effet nous nous intéressons uniquement aux particularités.
+\end{enumerate}
+Donc, chaque visage différe de la moyenne par le vecteur $\Phi_i = I_i - \Psi$. On pose $A = [\Phi_1~\Phi_2~\dots~\Phi_M]$ la matrice $N^2 \times M$ des visages normalisées.
+
+On calcule alors la matrice de covariance $C = AA^T$.\\
+Cette matrice encode la dispertion de nos images de visages dans $\mathbb{R}^{N^2}$. Les coefficients de la diagonale sont les variances selon les axes $e_1, e_2, \dots, e_{N^2}$.
+Les autres coefficients sont la covariance entre deux axes.
 
 \subsubsection{Méthode 1: Analyse en composantes principales}
 \subsubsection{Méthode 2: Décomposition en valeurs singulières}
@@ -69,26 +77,26 @@ Soit $\Gamma$ une nouvelle image de visage, on la projette dans l'espace des vis
 $$\omega_k = u_k^T(\Gamma - \Psi)$$
 pour $k = 1,~\dots,~M'$, on obtient ainsi un vecteur $\Omega$ tel que:
 \[\Omega =
-\begin{pmatrix}
-  \omega_1 \\
-  \vdots \\
-  \omega_{M'}
-\end{pmatrix}
+  \begin{pmatrix}
+    \omega_1 \\
+    \vdots \\
+    \omega_{M'}
+  \end{pmatrix}
 \]
 $\Omega$ décrit la contribution de chacun des eigenfaces pour l'image en question.
 
 \subsection{Analyse de la projection}
 On peut maintenant utiliser ce vecteur pour reconnaître si ce vecteur correspond à un visage déjà connue étant dans la base ou si c'est un visage inconnu.
 Pour ce faire, on cherche la classe $k$ qui minimise la distance euclidienne $\epsilon_k = \|(\Omega - \Omega_k)\|^2$
- où $\Omega_k$ est le vecteur décrivant la $k^{ieme}$ classe de visage. Les classes de visages $\Omega_i$ sont calculés en faisant la moyenne de plusieurs ou une image du visage de chaque individu. \\
- On considère ensuite qu'un visage appartient à une certaine classe de visage $k$ si le minimum $\epsilon_k$ est en dessous un certain seuil $\Theta$.
- Si $\forall k,~\epsilon_k > \Theta$, alors le visage est inconnu et on a alors une nouvelle classe de visage. \\
- Il y a finalement 4 possibilités pour une image:
+où $\Omega_k$ est le vecteur décrivant la $k^{ieme}$ classe de visage. Les classes de visages $\Omega_i$ sont calculés en faisant la moyenne de plusieurs ou une image du visage de chaque individu. \\
+On considère ensuite qu'un visage appartient à une certaine classe de visage $k$ si le minimum $\epsilon_k$ est en dessous un certain seuil $\Theta$.
+Si $\forall k,~\epsilon_k > \Theta$, alors le visage est inconnu et on a alors une nouvelle classe de visage. \\
+Il y a finalement 4 possibilités pour une image:
 \begin{enumerate}
-  \item L'image est proche de l'espace des visages et proche d'une classe de visage en particulier, c'est alors un visage connu
-  \item L'image est proche de l'espace des visages mais n'est proche d'aucune classe de visage, c'est alors un visage inconnu
-  \item L'image est distante de l'espace des visages mais proche d'une classe de visage, \emph{EXPLICATION!!!} C'est la plupart du temps un faux positif.
-  \item L'image est distante de l'espace des images et également distante de toutes les classes de visages, on peut alors en conlcure que ce n'est pas un visage
+\item L'image est proche de l'espace des visages et proche d'une classe de visage en particulier, c'est alors un visage connu
+\item L'image est proche de l'espace des visages mais n'est proche d'aucune classe de visage, c'est alors un visage inconnu
+\item L'image est distante de l'espace des visages mais proche d'une classe de visage, \emph{EXPLICATION!!!} C'est la plupart du temps un faux positif.
+\item L'image est distante de l'espace des images et également distante de toutes les classes de visages, on peut alors en conlcure que ce n'est pas un visage
 \end{enumerate}
 
 
