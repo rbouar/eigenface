@@ -7,6 +7,20 @@
 \usepackage{amssymb}
 \usepackage{amsthm}
 
+% quelques définitions
+\theoremstyle{plain}
+\newtheorem{thm}{Théorème}
+\newtheorem{cor}[thm]{Corollaire}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}{Proposition}
+\newtheorem{dem}{Démonstration}
+
+\theoremstyle{definition}
+\newtheorem{defi}{Définition}
+\newtheorem{rmq}{Remarque}
+\newtheorem{ex}{Exemple}
+\newtheorem{exo}{exercice}
+
 \title{Eigenfaces}
 \author{
   Bouarah Romain \and
@@ -54,7 +68,19 @@ On peut donc décrire notre espace des visages de manière plus fine (\textit{i.
 
 
 \subsubsection{Matrice de covariance}
-Avant de commencer la réduction de l'espace de travail, nous allons d'abord analyser cette dispertion en calculant la matrice de covariance.
+Avant de commencer la réduction de l'espace de travail, nous allons d'abord analyser cette dispersion en calculant la matrice de covariance.
+
+\begin{defi}
+  La matrice de covariance d'un vecteur de $p$ variables aléatoires $\overrightarrow{X} =
+  \begin{pmatrix}
+    X_1 \\
+    \vdots \\
+    X_p
+  \end{pmatrix}$ dont chacune possède une variance, est la matrice carrée dont le terme générique est donné par $a_{i,j} = Cov(X_i,X_j)$.
+\end{defi}
+\begin{defi}
+  La matrice de covariance, notée parfois $\Sigma$, est définie par $Var(\overrightarrow{X}) = \mathrm{E}[ (\overrightarrow{X}-\mathrm{E}(\overrightarrow{X})) (\overrightarrow{X}-\mathrm{E}(\overrightarrow{X}))^T]$
+\end{defi}
 
 Supposons que nous avons $M$ images de visage. On note $I = [I_1~I_2~\dots~I_M]$ la matrice de taille $N^2 \times M$ de l'ensemble de nos images. Normalisons nos images de visages :
 \begin{enumerate}
@@ -62,17 +88,22 @@ Supposons que nous avons $M$ images de visage. On note $I = [I_1~I_2~\dots~I_M]$
 \item On retire le visage moyen à chacun de nos visages, en effet nous nous intéressons uniquement aux particularités.
 \end{enumerate}
 Donc, chaque visage différe de la moyenne par le vecteur $\Phi_i = I_i - \Psi$. On pose $A = [\Phi_1~\Phi_2~\dots~\Phi_M]$ la matrice $N^2 \times M$ des visages normalisées.
+On calcule alors la matrice de covariance $C = \frac{1}{M}AA^T$.
 
-On calcule alors la matrice de covariance $C = AA^T$.\\
-Cette matrice encode la dispertion de nos images de visages dans $\mathbb{R}^{N^2}$. Les coefficients de la diagonale sont les variances selon les axes $e_1, e_2, \dots, e_{N^2}$.
+Cette matrice encode la dispersion de nos images de visages dans $\mathbb{R}^{N^2}$. Les coefficients de la diagonale sont les variances selon les axes $e_1, e_2, \dots, e_{N^2}$.
 Les autres coefficients sont la covariance entre deux axes.
 
-Remarquons que C est symétrique réelle.
+\begin{rmq}
+  $C$ est symétrique réelle donc diagonalisable dans une base orthonormée.
+\end{rmq}
+
 \subsubsection{Méthode 1: Analyse en composantes principales}
 L'analyse en composantes principales consiste à transformer des variables liées entre elles (dites ``corrélées'' en statistique) en nouvelles variables décorrélées les unes des autres.
+
 Ces nouvelles variables sont nommées ``composantes principales'', ou axes principaux, dans notre cas elles sont appelées \emph{eigenfaces}.
 
 L'ACP nous permet de réduire le nombre de variables et de rendre l'information moins redondante. En effet, nous cherchons les meilleurs axes ou \emph{eigenfaces} décrivant le mieux notre espace de visages.
+
 De plus, le nombre de \emph{eigenfaces} est toujours inférieurs au nombre d'images de visages.\\
 
 Finalement, nous cherchons le vecteur $u \in \mathbb{R}^{N^2}$ tel que la projection des images des visages sur $u$ ait une variance maximale. Cette projection s'écrit :
@@ -92,7 +123,7 @@ Le vecteur unitaire $u$ qui maximise $v^T D v$  est un vecteur propre de $C$ ass
   v^T D v = \lambda_1
 \]
 La valeur propre $\lambda_1$ est la variance empirique sur le premier axe de l'ACP. 
-
+On continue la recherche du deuxième axe de projection $w$ sur le même principe en imposant qu'il soit orthogonal à $u$.
 \subsubsection{Méthode 2: Décomposition en valeurs singulières}
 \section{Utilisation des eigenfaces pour classer une image de visage}
 % Les visages calculés avec les vecteurs propres forment un ensemble à l'aide duquel nous pouvons décrire un visage. \\
