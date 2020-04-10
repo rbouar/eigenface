@@ -1,8 +1,11 @@
 \documentclass[12pt,french]{article}
 
-\usepackage{amssymb}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
 \usepackage{amsmath}
-\usepackage{babel}
+\usepackage{amssymb}
+\usepackage{amsthm}
 
 \title{Eigenfaces}
 \author{
@@ -64,7 +67,32 @@ On calcule alors la matrice de covariance $C = AA^T$.\\
 Cette matrice encode la dispertion de nos images de visages dans $\mathbb{R}^{N^2}$. Les coefficients de la diagonale sont les variances selon les axes $e_1, e_2, \dots, e_{N^2}$.
 Les autres coefficients sont la covariance entre deux axes.
 
+Remarquons que C est symétrique réelle.
 \subsubsection{Méthode 1: Analyse en composantes principales}
+L'analyse en composantes principales consiste à transformer des variables liées entre elles (dites ``corrélées'' en statistique) en nouvelles variables décorrélées les unes des autres.
+Ces nouvelles variables sont nommées ``composantes principales'', ou axes principaux, dans notre cas elles sont appelées \emph{eigenfaces}.
+
+L'ACP nous permet de réduire le nombre de variables et de rendre l'information moins redondante. En effet, nous cherchons les meilleurs axes ou \emph{eigenfaces} décrivant le mieux notre espace de visages.
+De plus, le nombre de \emph{eigenfaces} est toujours inférieurs au nombre d'images de visages.\\
+
+Finalement, nous cherchons le vecteur $u \in \mathbb{R}^{N^2}$ tel que la projection des images des visages sur $u$ ait une variance maximale. Cette projection s'écrit :
+\[
+  p_u(A)=Au
+\]
+La variance empirique de $p_u(A)$ vaut donc $p_u(A)^T p_u(A) = u^T C u$
+
+Comme C est symétrique réelle, elle est donc diagonalisable dans une base orthonormée.\\
+Notons $P$ le changement de base associé et $D = Diag(\lambda_1, \dots, \lambda_L)$ la matrice diagonale formée de son spectre rangé en ordre décroissant, on a :
+\[
+  p_u(A)^T p_u(A) = u^T P^T D P u = (Pu)^T D \underbrace{(Pu)}_v
+\]
+
+Le vecteur unitaire $u$ qui maximise $v^T D v$  est un vecteur propre de $C$ associé à la valeur propre $\lambda_1$, on a alors :
+\[
+  v^T D v = \lambda_1
+\]
+La valeur propre $\lambda_1$ est la variance empirique sur le premier axe de l'ACP. 
+
 \subsubsection{Méthode 2: Décomposition en valeurs singulières}
 \section{Utilisation des eigenfaces pour classer une image de visage}
 % Les visages calculés avec les vecteurs propres forment un ensemble à l'aide duquel nous pouvons décrire un visage. \\
