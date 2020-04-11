@@ -94,7 +94,7 @@ Cette matrice encode la dispersion de nos images de visages dans $\mathbb{R}^{N^
 Les autres coefficients sont la covariance entre deux axes.
 
 \begin{rmq}
-  $C$ est symétrique réelle donc diagonalisable dans une base orthonormée.
+  $C$ est symétrique réelle donc diagonalisable dans une base orthonormée. $C$ est également définie semi-postivie, c'est à dire que toutes ses valeurs propres sont positives
 \end{rmq}
 
 \subsubsection{Méthode 1: Analyse en composantes principales}
@@ -122,9 +122,33 @@ Le vecteur unitaire $u$ qui maximise $v^T D v$  est un vecteur propre de $C$ ass
 \[
   v^T D v = \lambda_1
 \]
-La valeur propre $\lambda_1$ est la variance empirique sur le premier axe de l'ACP. 
+La valeur propre $\lambda_1$ est la variance empirique sur le premier axe de l'ACP.
 On continue la recherche du deuxième axe de projection $w$ sur le même principe en imposant qu'il soit orthogonal à $u$.
 \subsubsection{Méthode 2: Décomposition en valeurs singulières}
+
+La décomposition en valeurs singulières permet de factoriser des matrices carrés ou rectangulaires réels ou complexes, on s'intéressera ici au cas réels. \\
+Énoncé: Soit $M$ une matrice $m \times n$, alors il existe une décomposition de la forme: \\
+$$M=U\Sigma V^t$$
+Avec $U$ une matrice unitaire $m \times m$, $\Sigma$ une matrice $m\times n$ où les coefficients diagonaux sont des réels positifs ou nuls et tous les autres sont nuls, et $V$ est une matrice unitaire $n \times n$. On appelle ainsi cette factorisation la décomposition en valeurs singulières de $M$.
+\begin{itemize}
+  \item La matrice $V$ contient un ensemble de vecteurs de base orthonormés de $\mathbb{R}^n$ d'entrée
+  \item La matrice $U$ contient un ensemble de vecteurs de base orthonormés de $\mathbb{R}^m$ de sortie
+  \item La matrice $\Sigma$ contient dans ses coefficients diagonaux les valeurs singulières de la matrice $M$. Elles correspondent aux racines des valeurs propres de $M^t M$
+\end{itemize}
+
+On appelle ainsi valeur singulière de $M$ toute racine carrée d'une valeur propre de $M^t M$, autrement dit tout réel positif $\lambda$ tel qu'il existe un vecteur unitaire $u$ dans $\mathbb{R}^m$ et un vecteur unitaire $v$ vérifiant dans $\mathbb{R}^n$:
+$$ M^t u = \lambda v \text{ et } Mv = \lambda u$$
+
+Dans le cas d'une matrice carrée symétrique définie semi-positive (ce qui est le cas ici pour $C$) les valeurs singulières et vecteurs singuliers correspondent aux valeurs propres et vecteurs propres de M.
+
+
+Il existe plusieurs façon de calculer une décomposition en valeurs singulière. Un algorithme courant consiste en:
+\begin{itemize}
+  \item Effectuer une décomposition QR si la matrice possède plus de lignes que de colonnees
+  \item Réduire le facteur R sous forme bidiagonale, (on pourra notaement utiliser des transformations de Householder alternativement sur les colonnes et sur les lignes de la matrice).
+  \item Les valeurs singulières et vecteurs singuliers sont alors trouvés en effectuant une itération de type QR bidiagonale avec la procédure DBDSQR
+\end{itemize}
+
 \section{Utilisation des eigenfaces pour classer une image de visage}
 % Les visages calculés avec les vecteurs propres forment un ensemble à l'aide duquel nous pouvons décrire un visage. \\
 % 40 eigenfaces suffisent pour avoir une bonne description de l'ensemble des visages
