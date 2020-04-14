@@ -202,8 +202,13 @@ Une chaîne de Markov est un processus de Markov si X est une variable discrète
 Au contraire, dans un modèle de Markov caché, nous sommes dans un modèle markovien dont les états d'une exécution sont inconnus(cachés).
 Ce modèle est donc utile pour modéliser un système physique probabiliste, utilisé ici dans le cadre d'un algorithme d'optimisation (espérance-maximisation).
 Dans le cadre de la reconnaissance d'objets, c'est par l'étude des formes que ce modèle probabiliste propose un objet correspondant à une image reçue.
-\subsection{Réseaux de neurones}
-
+\subsection{Réseau de neurones convolutifs}
+Nous sommes dans le cadre d'un réseau de neurones convolutifs. Le réseau de neurones convolutifs est une branche de l'intelligence artificielle, le Deep Learning.(rappelons que l'analyse d'image est un domaine où le deep learning est utilisé) Le fonctionnement d'un réseau de neurones est similaire aux réseaux de neurones chez l'Homme. Chaque neurone a plusieurs entrées et une seule sortie, et des actions entre les deux. Les réseaux de neurones utilisent de l'algèbre linéaire (multiplication de matrices, dérivées partielles). Un réseau de neurones convolutifs est un réseau de neurones où les motifs de connexions entre les neurones est inspiré par le cortex visuel des humains. Chaque propriété d'une image analysée va occuper une place dans sa reconnaissance. L'analyse d'image ici passe par plusieurs "couches de neurones". Par exemple en premier la luminosité des pixels va être analysée, puis les corrélations entre des pixels voisins, à partir de ces corrélations identifier des lignes directrices, puis regrouper ces lignes directrices pour former des structures, puis identification des structures(par exemple des yeux), puis mettre en lien les identifications pour trouver l'identification de l'image.
+Une matrice de convolution est utilisée dans le traitement d'images pour le floutage, l'amélioration de la netteté de l'image, le gaufrage, la détection de contours, etc...
+Chaque neurone du réseau analysera une matrice de convolution en fonction du pixel. 
+Ainsi sont identifié les éléments d'une image, ou un visage sur une image amenant à la reconnaissance faciale.
+Ces réseaux de convolutions sont aussi utiles dans la compréhension de texte, en médecine, et même pour le jeu de go(soit lorsqu'il il y a une partielle corrélation globale, relative invariance spatiale ou temporelle(vidéo)).
+   
 \newpage
 \section{Applications de reconnaissances faciales par toutes les techniques vues}
 Il existe de nombreuses applications traitant de la reconnaissance faciale. On peut en trouver pour l'industrie, pour de la recherche, pour un particulier ou pour un organisme plus grand.
