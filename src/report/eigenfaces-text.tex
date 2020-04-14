@@ -198,7 +198,10 @@ Posons la notion de processus de Markov : une fonction aléatoire vérifiant que
 \[
 P(X_{n+1}=j | X_0=i_0, X_1=i_1, ..., X_n=i) = P(X_{n+1}=j | X_n=i)
 \]
-
+Une chaîne de Markov est un processus de Markov si X est une variable discrète muni par P, la fonction de probabilité.
+Au contraire, dans un modèle de Markov caché, nous sommes dans un modèle markovien dont les états d'une exécution sont inconnus(cachés).
+Ce modèle est donc utile pour modéliser un système physique probabiliste, utilisé ici dans le cadre d'un algorithme d'optimisation (espérance-maximisation).
+Dans le cadre de la reconnaissance d'objets, c'est par l'étude des formes que ce modèle probabiliste propose un objet correspondant à une image reçue.
 \subsection{Réseaux de neurones}
 
 \newpage
