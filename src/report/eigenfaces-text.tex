@@ -188,8 +188,19 @@ Il y a finalement 4 possibilités pour une image:
 \newpage
 \part{Partie pratique}
 \section{Autres techniques utilisés pour la reconnaissance faciale}
+La reconnaissance faciale par les Eigenfaces n'est pas forcément la technique la plus utilisée. D'autres techniques sont utilisés dans le domaine de la reconnaissance faciale et visuelle. Notamment on va voir qu'il y a le \textit{ Embedded Hidden Markov Model}(Embedded HMM) et les réseaux neuronaux convolutifs. 
 \subsection{Embedded HMM}
+En français, nous parlons de modèle de Markov caché, ou encore de automate de Markov à états cachés. Nous sommes dans le cadre des probabilités conditionnelles ici. Cette technique est plus utilisé pour de la reconnaissance visuelle, reconnaître des formes, des objets.
+Posons la notion de processus de Markov : une fonction aléatoire vérifiant que la distribution conditionnelle de probabilité de l'états futur de l'automate, ne dépend que de l'état présent, et non pas des états passés(propriété de Markov). Soit pour $E^{n+2}$ un ensemble de n+2 états:
+\[
+\forall n\geq0, \forall(i_0,..., i_{n-1}, i, j)\in E^{n+2},
+\]
+\[
+P(X_{n+1}=j | X_0=i_0, X_1=i_1, ..., X_n=i) = P(X_{n+1}=j | X_n=i)
+\]
+
 \subsection{Réseaux de neurones}
+
 \newpage
 \section{Applications de reconnaissances faciales par toutes les techniques vues}
 Il existe de nombreuses applications traitant de la reconnaissance faciale. On peut en trouver pour l'industrie, pour de la recherche, pour un particulier ou pour un organisme plus grand.
