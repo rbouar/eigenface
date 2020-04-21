@@ -1,61 +1,51 @@
 import cv2
 import os
 import numpy as np
-dir = "dataset/"
-image_list = []
-for file in os.listdir(dir):
-    path = dir + file
-    image = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
-    image_list.append(image)
 
-print("Nombres d'images: ", len(image_list))
-size = image_list[0].shape
+datadir = "dataset/"
+out_dir = "output/"
 
-# Transformation des matrices en vecteurs
-vectored_image_list = np.zeros((len(image_list), size[0] * size[1]), dtype=np.uint8)
-for i in range(len(image_list)):
-    vectored_image_list[i] = image_list[i].flatten()
-print(vectored_image_list[0].reshape(size))
+def load_images(dir):
+    image_list = []
+    for file in os.listdir(dir):
+        image = cv2.imread(dir + file, cv2.COLOR_BGR2GRAY)
+        image_list.append(image)
+    print("Nombres d'images: ", len(image_list))
+    return image_list
 
-mean_vector = np.mean(vectored_image_list, axis=0).astype(np.uint8)
+def images_to_vectored_images(image_list):
+    vectored_image_list = np.zeros((len(image_list), image_list[0].shape[0] * image_list[0].shape[1]), dtype=np.uint8)
+    for i in range(len(image_list)):
+        vectored_image_list[i] = image_list[i].flatten()
+    return vectored_image_list
 
-# print(mean_vector)
-A = np.subtract(vectored_image_list, mean_vector)
-# print(type(A[0][0]))
-# print(numpy.cov(A).shape)
-AT = A.T
-print("transpose OK")
-COV = np.dot(AT, A)
-# COV = np.load('cov.npy')
-print('laod:doone')
-print("AT * A: DONE")
-np.save('cov.npy', COV)
-print("save: DONE")
-# print(COV.shape)
+def create_output_dir(dir):
+    if not os.path.exists(dir):
+        os.mkdir(dir)
 
-# print(type(A))
-# print(A.shape)
-# AT = numpy.transpose(A)
-# print(len(A.dot(AT)))
-# print(len(AT))
-# cov = numpy.matmul(AT, A)
-# print(cov.shape)
+def save_eigenfaces(eigenfaces, size):
+    for i in range(len(eigenfaces)):
+        ei = eigenfaces[i]
+        im = cv2.normalize(ei.reshape(size), None, 0, 255, cv2.NORM_MINMAX, dtype=cv2.COLOR_BGR2GRAY)
+        cv2.imwrite(out_dir + "eigenface" + str(i) + ".png", im)
 
-# Calcul des vecteurs propre avec l'analyse en composante principal
-eigen_vectors = np.linalg.eigh(COV)
-# np.linalg.svd(COV, full_matrices=True, compute_uv=True, hermitian=True)
-print("Eigenvector:DONE")
+def main():
+    print("a")
+    create_output_dir(out_dir)
+    image_list = load_images(datadir)
+    size = image_list[0].shape
 
-# Convertion des vecteurs en images de la taille original
-eigen_faces = []
-# avg_face = avg_face_vector.reshape(size)
-# for ev in eigen_vectors:
-    # eigen_faces.append(ev.reshape(size))
-#
-# cv2.imshow('average face', avg_face)
-# i = 0
-# for ef in eigen_faces:
-    # cv2.imshow("eigen" + str(i), ef)
-    # i +=1
-# cv2.waitKey(0)
-# cv2.destroyAllWindows()
+    vectored_image_list = images_to_vectored_images(image_list)
+
+    mean_vector = np.mean(vectored_image_list, axis=0).astype(np.uint8)
+    cv2.imwrite(out_dir + "mean.png", mean_vector.reshape(size))
+
+    A = np.subtract(vectored_image_list, mean_vector)
+
+    U, S, V = np.linalg.svd(A.T, full_matrices=False)
+    eigenfaces = U.T
+
+    save_eigenfaces(eigenfaces, size)
+
+if __name__== '__main__':
+    main()
