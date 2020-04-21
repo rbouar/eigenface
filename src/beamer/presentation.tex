@@ -1,0 +1,130 @@
+\documentclass{beamer}
+
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+
+% quelques définitions
+\theoremstyle{plain}
+\newtheorem{thm}{Théorème}
+\newtheorem{cor}[thm]{Corollaire}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}{Proposition}
+\newtheorem{dem}{Démonstration}
+
+\theoremstyle{definition}
+\newtheorem{defi}{Définition}
+\newtheorem{qst}{Question}
+
+
+\usetheme{Berlin}
+
+\title{Reconnaissance faciale par Eigenfaces}
+\author{Bouarah Romain \and Langdorph Matthieu \and Ketels Lucas \and Nathan Souffan }
+\date{\today}
+
+\begin{document}
+
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+
+\begin{frame}[shrink]
+  \tableofcontents
+\end{frame}
+
+
+\section{Introduction}
+\subsection{Motivation}
+\subsection{Histoire}
+
+\section{Calcul des eigenfaces}
+\subsection{Travail dans $\mathbb{R}^{N \times N}$}
+\begin{frame}
+  \frametitle{Représentation matricielle des images}
+  \begin{defi}
+    Une image de taille $N \times N$ est représentée par une matrice $N \times N$.\\
+    Chaque coefficient représente un niveau de gris d'un pixel.
+  \end{defi}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Transformation en un vecteur de $\mathbb{R}^{N \times N}$}
+  On juxtapose simplement les colonnes de la matrice l'une en dessous de l'autre.
+  \[
+    \begin{pmatrix}
+      p_{1,1} & p_{1,2} & \cdots & p_{1,N} \\
+      p_{2,1} & p_{2,2} & \cdots & p_{2,N} \\
+      \vdots  & \vdots  & \ddots & \vdots  \\
+      p_{N,1} & p_{N,2} & \cdots & p_{N,N}
+    \end{pmatrix}
+    \rightarrow
+    \begin{pmatrix}
+      p_{1,1} \\
+      p_{2,1} \\
+      \vdots \\
+      p_{N,1} \\
+      \vdots \\
+      p_{1,N} \\
+      \vdots \\
+      p_{N,N}
+    \end{pmatrix}
+  \]
+  
+\end{frame}
+
+
+
+\subsection{Matrice de covariance}
+
+\begin{frame}  
+  \frametitle{Observation sur les images des visages}
+  \begin{qst}
+    Que dire de la position de nos images de visage dans l'espace $\mathbb{R}^{N \times N}$?
+  \end{qst}
+  \pause
+  \begin{exampleblock}{Réponse}
+    Nos images de visages ne sont pas si éloignées les unes des autres. 
+  \end{exampleblock}
+\end{frame}
+
+
+\begin{frame}
+\begin{defi}[Matrice de Covariance]
+  La matrice de covariance d'un vecteur de $p$ variables aléatoires $\overrightarrow{X} =
+  \begin{pmatrix}
+    X_1 \\
+    \vdots \\
+    X_p
+  \end{pmatrix}$ dont chacune possède une variance, est la matrice carrée dont le terme générique est donné par $a_{i,j} = Cov(X_i,X_j)$.
+\end{defi}
+
+\begin{defi}[Matrice de Covariance]
+  La matrice de covariance est définie par $Var(\overrightarrow{X}) = \mathrm{E}[ (\overrightarrow{X}-\mathrm{E}(\overrightarrow{X})) (\overrightarrow{X}-\mathrm{E}(\overrightarrow{X}))^T]$
+\end{defi}
+\end{frame}
+
+
+\subsection{Analyse en composantes principales}
+\subsection{Décomposition en valeurs singulières}
+
+\section{Classification des visages}
+\subsection{Projection dans l'espace des visages}
+\subsection{Analyse de la projection}
+
+\section{Application}
+\subsection{Techniques utilisées aujourd'hui}
+\subsection{Par les téléphones}
+
+\section{Conclusion}
+\subsection{Risque de la reconnaissance faciale}
+\subsection{Références}
+
+\end{document}
