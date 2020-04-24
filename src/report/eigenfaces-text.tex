@@ -95,19 +95,24 @@ Avant de commencer la réduction de l'espace de travail, nous allons d'abord ana
 \begin{defi}[Estimation de la Matrice de Covariance]
   En partant d’un échantillon de réalisations indépendantes d’un vecteur aléatoire, un estimateur non-biaisé de la matrice de covariance est donné par :
   \[
-    \Var(\overrightarrow{X}) = \frac{1}{n-1} \displaystyle\sum_{i=1}^{n} (\overrightarrow{X_i}-\overrightarrow{\mu})(\overrightarrow{X_i}-\overrightarrow{\mu})^T
+    \Var(\overrightarrow{X}) = \frac{1}{n-1} \displaystyle\sum_{i=1}^{n} (\overrightarrow{X_i} - \overrightarrow{\mu})(\overrightarrow{X_i}-\overrightarrow{\mu})^T
   \]
-  où $\mu = \frac{1}{n} \displaystyle\sum_{i=1}^{n}\overrightarrow{X_i}$ est le vecteur des moyennes empiriques.
+  où $\overrightarrow{\mu} = \frac{1}{n} \displaystyle\sum_{i=1}^{n}\overrightarrow{X_i}$ est le vecteur des moyennes empiriques.
 \end{defi}
 
-Supposons que nous avons $M$ images de visage. On note $I = [I_1~I_2~\dots~I_M]$ la matrice de taille $N^2 \times M$ de l'ensemble de nos images. Normalisons nos images de visages :
+\paragraph{Application à notre cas}
+Supposons que nous avons $M$ images de visage. On note $I = [I_1, I_2, \dotsc, I_M]$ la matrice de taille $N^2 \times M$ de l'ensemble de nos images.
 \begin{enumerate}
 \item On calcule le visage moyen $\Psi = \frac{1}{M}\displaystyle\sum_{i=1}^{M} I_i$.
-\item On retire le visage moyen à chacun de nos visages, en effet nous nous intéressons uniquement aux particularités.
+\item On retire le visage moyen à chacun de nos visages, en effet nous nous intéressons uniquement aux particularités.\\
+  Donc, chaque visage différe de la moyenne par le vecteur $\Phi_i = I_i - \Psi$.
+\item On calcule la matrice de covariance
+  \begin{align*}    
+    C &= \frac{1}{M-1} \displaystyle\sum_{i=1}^{M} \Phi_i \Phi_i^T \\
+      &= \frac{1}{M-1} AA^T 
+  \end{align*}
+  où $A = [\Phi_1,\Phi_2,\dotsc,\Phi_M]$ est la matrice $N^2 \times M$ de nos visages centrés.
 \end{enumerate}
-Donc, chaque visage différe de la moyenne par le vecteur $\Phi_i = I_i - \Psi$. On pose $A = [\Phi_1~\Phi_2~\dots~\Phi_M]$ la matrice $N^2 \times M$ des visages normalisées.
-On calcule alors la matrice de covariance $C = \frac{1}{M}AA^T$.
-
 Cette matrice encode la dispersion de nos images de visages dans $\mathbb{R}^{N^2}$. Les coefficients de la diagonale sont les variances selon les axes $e_1, e_2, \dots, e_{N^2}$.
 Les autres coefficients sont la covariance entre deux axes.
 
@@ -149,9 +154,9 @@ La décomposition en valeurs singulières permet de factoriser des matrices carr
 $$M=U\Sigma V^t$$
 Avec $U$ une matrice unitaire $m \times m$, $\Sigma$ une matrice $m\times n$ où les coefficients diagonaux sont des réels positifs ou nuls et tous les autres sont nuls, et $V$ est une matrice unitaire $n \times n$. On appelle ainsi cette factorisation la décomposition en valeurs singulières de $M$.
 \begin{itemize}
-  \item La matrice $V$ contient un ensemble de vecteurs de base orthonormés de $\mathbb{R}^n$ d'entrée
-  \item La matrice $U$ contient un ensemble de vecteurs de base orthonormés de $\mathbb{R}^m$ de sortie
-  \item La matrice $\Sigma$ contient dans ses coefficients diagonaux les valeurs singulières de la matrice $M$. Elles correspondent aux racines des valeurs propres de $M^t M$
+\item La matrice $V$ contient un ensemble de vecteurs de base orthonormés de $\mathbb{R}^n$ d'entrée
+\item La matrice $U$ contient un ensemble de vecteurs de base orthonormés de $\mathbb{R}^m$ de sortie
+\item La matrice $\Sigma$ contient dans ses coefficients diagonaux les valeurs singulières de la matrice $M$. Elles correspondent aux racines des valeurs propres de $M^t M$
 \end{itemize}
 
 On appelle ainsi valeur singulière de $M$ toute racine carrée d'une valeur propre de $M^t M$, autrement dit tout réel positif $\lambda$ tel qu'il existe un vecteur unitaire $u$ dans $\mathbb{R}^m$ et un vecteur unitaire $v$ vérifiant dans $\mathbb{R}^n$:
@@ -162,9 +167,9 @@ Dans le cas d'une matrice carrée symétrique définie semi-positive (ce qui est
 
 Il existe plusieurs façon de calculer une décomposition en valeurs singulière. Un algorithme courant consiste en:
 \begin{itemize}
-  \item Effectuer une décomposition QR si la matrice possède plus de lignes que de colonnees
-  \item Réduire le facteur R sous forme bidiagonale, (on pourra notaement utiliser des transformations de Householder alternativement sur les colonnes et sur les lignes de la matrice).
-  \item Les valeurs singulières et vecteurs singuliers sont alors trouvés en effectuant une itération de type QR bidiagonale avec la procédure DBDSQR
+\item Effectuer une décomposition QR si la matrice possède plus de lignes que de colonnees
+\item Réduire le facteur R sous forme bidiagonale, (on pourra notaement utiliser des transformations de Householder alternativement sur les colonnes et sur les lignes de la matrice).
+\item Les valeurs singulières et vecteurs singuliers sont alors trouvés en effectuant une itération de type QR bidiagonale avec la procédure DBDSQR
 \end{itemize}
 
 \section{Utilisation des eigenfaces pour classer une image de visage}
@@ -211,10 +216,10 @@ La reconnaissance faciale par les Eigenfaces n'est pas forcément la technique l
 En français, nous parlons de modèle de Markov caché, ou encore de automate de Markov à états cachés. Nous sommes dans le cadre des probabilités conditionnelles ici. Cette technique est plus utilisé pour de la reconnaissance visuelle, reconnaître des formes, des objets.
 Posons la notion de processus de Markov : une fonction aléatoire vérifiant que la distribution conditionnelle de probabilité de l'états futur de l'automate, ne dépend que de l'état présent, et non pas des états passés(propriété de Markov). Soit pour $E^{n+2}$ un ensemble de n+2 états:
 \[
-\forall n\geq0, \forall(i_0,..., i_{n-1}, i, j)\in E^{n+2},
+  \forall n\geq0, \forall(i_0,..., i_{n-1}, i, j)\in E^{n+2},
 \]
 \[
-P(X_{n+1}=j | X_0=i_0, X_1=i_1, ..., X_n=i) = P(X_{n+1}=j | X_n=i)
+  P(X_{n+1}=j | X_0=i_0, X_1=i_1, ..., X_n=i) = P(X_{n+1}=j | X_n=i)
 \]
 Une chaîne de Markov est un processus de Markov si X est une variable discrète muni par P, la fonction de probabilité.
 Au contraire, dans un modèle de Markov caché, nous sommes dans un modèle markovien dont les états d'une exécution sont inconnus(cachés).
@@ -226,7 +231,7 @@ Une matrice de convolution est utilisée dans le traitement d'images pour le flo
 Chaque neurone du réseau analysera une matrice de convolution en fonction du pixel. 
 Ainsi sont identifié les éléments d'une image, ou un visage sur une image amenant à la reconnaissance faciale.
 Ces réseaux de convolutions sont aussi utiles dans la compréhension de texte, en médecine, et même pour le jeu de go(soit lorsqu'il il y a une partielle corrélation globale, relative invariance spatiale ou temporelle(vidéo)).
-   
+
 \newpage
 \section{Applications de reconnaissances faciales par toutes les techniques vues}
 Il existe de nombreuses applications traitant de la reconnaissance faciale. On peut en trouver pour l'industrie, pour de la recherche, pour un particulier ou pour un organisme plus grand.
