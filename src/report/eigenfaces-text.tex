@@ -93,9 +93,9 @@ Avant de commencer la réduction de l'espace de travail, nous allons d'abord ana
 \end{defi}
 
 \begin{defi}[Estimation de la Matrice de Covariance]
-  En partant d’un échantillon de réalisations indépendantes d’un vecteur aléatoire, un estimateur non-biaisé de la matrice de covariance est donné par :
+  En partant d’un échantillon de réalisations indépendantes d’un vecteur aléatoire, une estimation de la matrice de covariance est donné par :
   \[
-    \Var(\overrightarrow{X}) = \frac{1}{n-1} \displaystyle\sum_{i=1}^{n} (\overrightarrow{X_i} - \overrightarrow{\mu})(\overrightarrow{X_i}-\overrightarrow{\mu})^T
+    \Var(\overrightarrow{X}) = \frac{1}{n} \displaystyle\sum_{i=1}^{n} (\overrightarrow{X_i} - \overrightarrow{\mu})(\overrightarrow{X_i}-\overrightarrow{\mu})^T
   \]
   où $\overrightarrow{\mu} = \frac{1}{n} \displaystyle\sum_{i=1}^{n}\overrightarrow{X_i}$ est le vecteur des moyennes empiriques.
 \end{defi}
@@ -108,8 +108,8 @@ Supposons que nous avons $M$ images de visage. On note $I = [I_1, I_2, \dotsc, I
   Donc, chaque visage différe de la moyenne par le vecteur $\Phi_i = I_i - \Psi$.
 \item On calcule la matrice de covariance
   \begin{align*}    
-    C &= \frac{1}{M-1} \displaystyle\sum_{i=1}^{M} \Phi_i \Phi_i^T \\
-      &= \frac{1}{M-1} AA^T 
+    C &= \frac{1}{M} \displaystyle\sum_{i=1}^{M} \Phi_i \Phi_i^T \\
+      &= \frac{1}{M} AA^T 
   \end{align*}
   où $A = [\Phi_1,\Phi_2,\dotsc,\Phi_M]$ est la matrice $N^2 \times M$ de nos visages centrés.
 \end{enumerate}
