@@ -1,4 +1,5 @@
 \documentclass{beamer}
+\hypersetup{pdfstartview={Fit}}
 
 \usepackage[french]{babel}
 \usepackage[T1]{fontenc}
@@ -12,14 +13,19 @@
 % quelques définitions
 \theoremstyle{plain}
 \newtheorem{thm}{Théorème}
-\newtheorem{cor}[thm]{Corollaire}
-\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}{Corollaire}
+\newtheorem{lem}{Lemma}
 \newtheorem{prop}{Proposition}
 \newtheorem{dem}{Démonstration}
 
 \theoremstyle{definition}
 \newtheorem{defi}{Définition}
 \newtheorem{qst}{Question}
+\newtheorem{rmq}{Remarque}
+
+\DeclareMathOperator\Var{Var}
+\DeclareMathOperator\Cov{Cov}
+\DeclareMathOperator\esp{E}
 
 
 \usetheme{Berlin}
@@ -87,7 +93,7 @@
 \begin{frame}  
   \frametitle{Observation sur les images des visages}
   \begin{qst}
-    Que dire de la position de nos images de visage dans l'espace $\mathbb{R}^{N \times N}$?
+    Que dire de la position de nos images de visages dans l'espace $\mathbb{R}^{N \times N}$?
   \end{qst}
   \pause
   \begin{exampleblock}{Réponse}
@@ -97,22 +103,77 @@
 
 
 \begin{frame}
-\begin{defi}[Matrice de Covariance]
-  La matrice de covariance d'un vecteur de $p$ variables aléatoires $\overrightarrow{X} =
-  \begin{pmatrix}
-    X_1 \\
-    \vdots \\
-    X_p
-  \end{pmatrix}$ dont chacune possède une variance, est la matrice carrée dont le terme générique est donné par $a_{i,j} = Cov(X_i,X_j)$.
-\end{defi}
-
-\begin{defi}[Matrice de Covariance]
-  La matrice de covariance est définie par $Var(\overrightarrow{X}) = \mathrm{E}[ (\overrightarrow{X}-\mathrm{E}(\overrightarrow{X})) (\overrightarrow{X}-\mathrm{E}(\overrightarrow{X}))^T]$
-\end{defi}
+  \frametitle{Définition de la Matrice de Covariance}  
+  \begin{defi}
+    La matrice de covariance d'un vecteur de $p$ variables aléatoires $\overrightarrow{X} =
+    \begin{pmatrix}
+      X_1 \\
+      \vdots \\
+      X_p
+    \end{pmatrix}$ dont chacune possède une variance, est la matrice carrée dont le terme générique est donné par $a_{i,j} = \Cov(X_i,X_j)$.
+  \end{defi}
 \end{frame}
 
 
+\begin{frame}
+  \frametitle{Encodons cette dispersion}  
+  \begin{defi}[Estimation de la Matrice de Covariance]
+    En partant d’un échantillon de réalisations indépendantes d’un vecteur aléatoire, une estimation de la matrice de covariance est donné par :
+    \[
+      \Var(\overrightarrow{X}) = \frac{1}{n} \displaystyle\sum_{i=1}^{n} (\overrightarrow{X_i} - \overrightarrow{\mu})(\overrightarrow{X_i}-\overrightarrow{\mu})^T
+    \]
+    où $\overrightarrow{\mu} = \frac{1}{n} \displaystyle\sum_{i=1}^{n}\overrightarrow{X_i}$ est le vecteur des moyennes empiriques.
+  \end{defi}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Application à notre cas}
+  Soit $I = [I_1,I_2,\dotsc,I_M]$ la matrice de l'ensemble de nos images.
+  \pause
+  \begin{enumerate}
+  \item On calcule le visage moyen $\Psi = \frac{1}{M}\displaystyle\sum_{i=1}^{M} I_i$.
+    \pause
+  \item Chaque visage différe donc de la moyenne par le vecteur $\Phi_i = I_i - \Psi$.
+    \pause
+  \item On calcule la matrice de covariance
+    \[
+      C = \frac{1}{M} \displaystyle\sum_{i=1}^{M} \Phi_i \Phi_i^T = \frac{1}{M} AA^T 
+    \]
+    où $A = [\Phi_1,\Phi_2,\dotsc,\Phi_M]$.    
+  \end{enumerate}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Observations sur la Matrice de Covariance}
+  La matrice de covariance $C$ est :
+  \pause
+  \begin{itemize}
+  \item symétrique réelle.
+    \pause
+  \item définie semi-positive.
+  \end{itemize}
+\end{frame}
+
 \subsection{Analyse en composantes principales}
+
+\begin{frame}
+  \frametitle{Introduction à l'Analyse en Composantes Principales}
+  \begin{block}{Principe}
+    Transformer des variables liées entre elles en nouvelles variables décorrélées les unes des autres.
+  \end{block}
+  \pause
+  \begin{defi}[Eigenfaces]
+    La méthode développéee par Turk et Pentland définit les \emph{eigenfaces} comme les axes principaux de l'ACP.
+  \end{defi}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Illustration Deux Dimensions}
+  Des graphiques
+\end{frame}
+
 \subsection{Décomposition en valeurs singulières}
 
 \section{Classification des visages}
@@ -126,5 +187,8 @@
 \section{Conclusion}
 \subsection{Risque de la reconnaissance faciale}
 \subsection{Références}
+
+\begin{frame}  
+\end{frame}
 
 \end{document}
