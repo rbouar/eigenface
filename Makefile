@@ -11,6 +11,7 @@ REPORTPDF=target/eigenfaces-text.pdf
 PRESENTATIONSRC=src/beamer/presentation.tex
 PRESENTATIONPDF=target/presentation.pdf
 
+all: report presentation
 
 report:
 	mkdir -p $(TARGET)

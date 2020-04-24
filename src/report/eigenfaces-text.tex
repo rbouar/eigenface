@@ -21,6 +21,12 @@
 \newtheorem{ex}{Exemple}
 \newtheorem{exo}{exercice}
 
+% opérateurs pour les probabilités
+\DeclareMathOperator\Var{Var}
+\DeclareMathOperator\Cov{Cov}
+\DeclareMathOperator\esp{E}
+
+
 \title{Eigenfaces}
 \author{
   Bouarah Romain \and
@@ -68,18 +74,30 @@ On peut donc décrire notre espace des visages de manière plus fine (\textit{i.
 
 
 \subsubsection{Matrice de covariance}
-Avant de commencer la réduction de l'espace de travail, nous allons d'abord analyser cette dispersion en calculant la matrice de covariance.
+Avant de commencer la réduction de l'espace de travail, nous allons d'abord analyser cette dispersion en calculant la matrice de covariance de manière empirique.
 
-\begin{defi}
+\begin{defi}[Matrice de Covariance]
   La matrice de covariance d'un vecteur de $p$ variables aléatoires $\overrightarrow{X} =
   \begin{pmatrix}
     X_1 \\
     \vdots \\
     X_p
-  \end{pmatrix}$ dont chacune possède une variance, est la matrice carrée dont le terme générique est donné par $a_{i,j} = Cov(X_i,X_j)$.
+  \end{pmatrix}$ dont chacune possède une variance, est la matrice carrée dont le terme générique est donné par $a_{i,j} = \Cov(X_i,X_j)$.
 \end{defi}
-\begin{defi}
-  La matrice de covariance, notée parfois $\Sigma$, est définie par $Var(\overrightarrow{X}) = \mathrm{E}[ (\overrightarrow{X}-\mathrm{E}(\overrightarrow{X})) (\overrightarrow{X}-\mathrm{E}(\overrightarrow{X}))^T]$
+
+\begin{defi}[Matrice de Covariance]
+  La matrice de covariance, notée parfois $\Sigma$, est définie par :
+  \[
+    \Var(\overrightarrow{X}) = \esp[(\overrightarrow{X}-\esp(\overrightarrow{X})) (\overrightarrow{X}-\esp(\overrightarrow{X}))^T]
+  \]
+\end{defi}
+
+\begin{defi}[Estimation de la Matrice de Covariance]
+  En partant d’un échantillon de réalisations indépendantes d’un vecteur aléatoire, un estimateur non-biaisé de la matrice de covariance est donné par :
+  \[
+    \Var(\overrightarrow{X}) = \frac{1}{n-1} \displaystyle\sum_{i=1}^{n} (\overrightarrow{X_i}-\overrightarrow{\mu})(\overrightarrow{X_i}-\overrightarrow{\mu})^T
+  \]
+  où $\mu = \frac{1}{n} \displaystyle\sum_{i=1}^{n}\overrightarrow{X_i}$ est le vecteur des moyennes empiriques.
 \end{defi}
 
 Supposons que nous avons $M$ images de visage. On note $I = [I_1~I_2~\dots~I_M]$ la matrice de taille $N^2 \times M$ de l'ensemble de nos images. Normalisons nos images de visages :
