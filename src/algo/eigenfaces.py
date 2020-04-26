@@ -2,14 +2,18 @@ import cv2
 import os
 import numpy as np
 
+threshold_is_face = 0.5
+threshold_is_known_face = 0.1
+datadir = "yale_dataset/"
+out_dir = "output/"
 
-def load_images(dir):
+def load_images():
     image_list = []
     subjects = {}
     dim = None
-    for subdir in os.listdir(dir):
+    for subdir in os.listdir(datadir):
         name = subdir
-        subdir = dir + subdir + "/"
+        subdir = datadir + subdir + "/"
         if (os.path.isdir(subdir)):
             subject = []
             for file in os.listdir(subdir):
@@ -24,17 +28,17 @@ def load_images(dir):
     print("Nombre d'individus: ", len(subjects))
     return np.array(image_list), subjects, dim
 
-def create_output_dir(dir):
-    if not os.path.exists(dir):
-        os.mkdir(dir)
-    if not os.path.exists(dir + "eigenfaces/"):
-        os.mkdir(dir + "eigenfaces/")
+def create_output_dir():
+    if not os.path.exists(out_dir):
+        os.mkdir(out_dir)
+    if not os.path.exists(out_dir + "eigenfaces/"):
+        os.mkdir(out_dir + "eigenfaces/")
 
-def save_eigenfaces(eigenfaces, dim, dir):
+def save_eigenfaces(eigenfaces, dim):
     for i in range(len(eigenfaces)):
         ei = eigenfaces[i]
         im = cv2.normalize(ei.reshape(dim), None, 0, 255, cv2.NORM_MINMAX, dtype=cv2.COLOR_BGR2GRAY)
-        cv2.imwrite(dir + "eigenfaces/eigenface" + str(i) + ".jpg", im)
+        cv2.imwrite(out_dir + "eigenfaces/eigenface" + str(i) + ".jpg", im)
 
 def init_face_class(subjects, eigenfaces, mean, dim):
     face_class = {}
@@ -61,32 +65,31 @@ def nearest(proj_face, face_class):
             min = norm
 
     return nearest, min
+
+def result(proj_face, face_class, facespace_dist):
+    nearest_class, norm = nearest(proj_face, face_class)
+    print("Distance par rapport à l'espace des images: " + str(facespace_dist))
+    print("Personne la plus proche: " + str(nearest_class) + " avec une distance de " + str(norm))
+
+
 def main():
-    threshold_is_face = 0.5
-    threshold_is_known_face = 0.1
-    datadir = "att_faces/"
-    out_dir = "output/"
-    create_output_dir(out_dir)
-    image_list, subjects, dim = load_images(datadir)
+    create_output_dir()
+    image_list, subjects, dim = load_images()
     mean = np.mean(image_list, axis=0)
     cv2.imwrite(out_dir + "mean.jpg", mean.astype(np.uint8).reshape(dim))
-    im_to_test = cv2.imread("att_faces/s1/1.pgm", cv2.IMREAD_GRAYSCALE).flatten().astype(np.float64)
+    im_to_test = cv2.imread("yale_dataset/s2/yaleB02_P00A-010E-20.pgm", cv2.IMREAD_GRAYSCALE).flatten().astype(np.float64)
     A = np.subtract(image_list, mean)
     U, S, V = np.linalg.svd(A.T, full_matrices=False)
     eigenfaces = U
 
-    save_eigenfaces(eigenfaces.T, dim, out_dir)
+    save_eigenfaces(eigenfaces.T, dim)
 
     face_class = init_face_class(subjects, eigenfaces, mean, dim)
     proj_face = projection(eigenfaces, im_to_test, mean, dim, out_dir + "proj.jpg")
     facespace_dist = np.linalg.norm(im_to_test - proj_face)
+    result(proj_face, face_class, facespace_dist)
 
-    nearest_class, norm = nearest(proj_face, face_class)
-    print(nearest_class)
-    print(norm)
-    print(facespace_dist)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+
 
 
 if __name__== '__main__':
