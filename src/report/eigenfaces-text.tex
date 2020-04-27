@@ -122,32 +122,39 @@ Les autres coefficients sont la covariance entre deux axes.
 \end{rmq}
 
 \subsubsection{Méthode 1: Analyse en composantes principales}
-L'analyse en composantes principales consiste à transformer des variables liées entre elles (dites ``corrélées'' en statistique) en nouvelles variables décorrélées les unes des autres.
-
-Ces nouvelles variables sont nommées ``composantes principales'', ou axes principaux, dans notre cas elles sont appelées \emph{eigenfaces}.
-
-L'ACP nous permet de réduire le nombre de variables et de rendre l'information moins redondante. En effet, nous cherchons les meilleurs axes ou \emph{eigenfaces} décrivant le mieux notre espace de visages.
-
-De plus, le nombre de \emph{eigenfaces} est toujours inférieurs au nombre d'images de visages.\\
+L'analyse en composantes principales consiste à transformer des variables liées entre elles (dites ``corrélées'' en statistique) en nouvelles variables décorrélées les unes des autres.\\
+Ces nouvelles variables sont nommées ``composantes principales'', ou axes principaux, dans notre cas elles sont appelées \emph{eigenfaces}.\\
+L'ACP nous permet de réduire le nombre de variables et de rendre l'information moins redondante. En effet, nous cherchons les meilleurs axes ou \emph{eigenfaces} décrivant le mieux notre espace de visages.\\
 
 Finalement, nous cherchons le vecteur $u \in \mathbb{R}^{N^2}$ tel que la projection des images des visages sur $u$ ait une variance maximale. Cette projection s'écrit :
 \[
-  p_u(A)=Au
+  p_u(A)=A^T \cdot u
 \]
-La variance empirique de $p_u(A)$ vaut donc $p_u(A)^T p_u(A) = u^T C u$
-
-Comme C est symétrique réelle, elle est donc diagonalisable dans une base orthonormée.\\
-Notons $P$ le changement de base associé et $D = Diag(\lambda_1, \dots, \lambda_L)$ la matrice diagonale formée de son spectre rangé en ordre décroissant, on a :
-\[
-  p_u(A)^T p_u(A) = u^T P^T D P u = (Pu)^T D \underbrace{(Pu)}_v
-\]
+La variance empirique de $p_u(A)$ vaut donc :
+\begin{align*}
+  p_u(A)^T \cdot \frac{1}{M} \cdot p_u(A) &= (A^T \cdot u)^T \cdot \frac{1}{M} \cdot (A^T \cdot u)\\
+                                          &= u^T \cdot \left( A \cdot \frac{1}{M} \cdot A^T \right) \cdot u\\
+                                          &= u^T \cdot C \cdot u
+\end{align*}
+$C$ est symétrique réelle donc $C$ est diagonalisable dans une base orthonormée,
+notons $P$ le changement de base associé et $D = Diag(\lambda_1, \dotsc, \lambda_L)$ la matrice diagonale formée de son spectre rangé en ordre décroissant, on a :
+\begin{align*}
+  p_u(A)^T \cdot \frac{1}{M} \cdot p_u(A) &= u^T \cdot C \cdot u\\
+                                          &= u^T P^T D P u = (Pu)^T D \underbrace{(Pu)}_v
+\end{align*}
 
 Le vecteur unitaire $u$ qui maximise $v^T D v$  est un vecteur propre de $C$ associé à la valeur propre $\lambda_1$, on a alors :
 \[
   v^T D v = \lambda_1
 \]
 La valeur propre $\lambda_1$ est la variance empirique sur le premier axe de l'ACP.
-On continue la recherche du deuxième axe de projection $w$ sur le même principe en imposant qu'il soit orthogonal à $u$.
+On continue la recherche du deuxième axe de projection $w$ sur le même principe en imposant qu'il soit orthogonal à $u$.\\
+
+La diagonalisation de la matrice de covariance, nous a permis d'écrire que le vecteur qui explique le plus d'inertie du nuage est le premier vecteur propre.
+De même le deuxième vecteur qui explique la plus grande part de l'inertie restante est le deuxième vecteur propre, etc.\\
+Nous avons vu en outre que la variance expliquée par le k-ième vecteur propre vaut $\lambda_k$.\\
+Finalement, la question de l'ACP se ramène à un problème de diagonalisation de la matrice de covariance. 
+
 \subsubsection{Méthode 2: Décomposition en valeurs singulières}
 
 La décomposition en valeurs singulières permet de factoriser des matrices carrés ou rectangulaires réels ou complexes, on s'intéressera ici au cas réels. \\
@@ -257,85 +264,85 @@ La France veut être dans la course aussi, et développe par Thalès, une applic
 
 \newpage
 \begin{thebibliography}{18}
-	\bibitem{}
-	MIT Press Journal~: Eigenfaces for recognition
-	\\\textit{https://www.mitpressjournals.org/doi/abs/10.1162/jocn.1991.3.1.71}
-	\\
-	\underline{Présentation générale :}
-	
-	\bibitem{}
-	Wikipedia~: Eigenface
-	\\\textit{https://en.wikipedia.org/wiki/Eigenface}
-	
-	\bibitem{}
-	Scholarpedia~: Eigenface
-	\\\textit{http://www.scholarpedia.org/article/Eigenface}
-	
-	\bibitem{}
-	jmcSpot~: EigenFace
-	\\\textit{http://jmcspot.com/Eigenface/}
-	
-	\underline{Algorithme :}
-	
-	\bibitem{}
-	Github~: Reconnaissance faciale
-	\\\textit{https://github.com/msilanus/faceReco}
-	
-	\bibitem{}
-	Cours IUT BM~: Eigenfaces 
-	\\\textit{http://cours-info.iut-bm.univ-fcomte.fr/wiki/pmwiki.php/TP/EigenFaces}
-	
-	\bibitem{}
-	Ecole Supérieur d'ingénieur de Rennes : TP Eigenface
-	\\\textit{TP-ESIR-Eigenface.pdf}
-	\\
-	\underline{Mathématiques :}
-	
-	\bibitem{}
-	Wikipedia~: Covariance
-	\\\textit{https://fr.wikipedia.org/wiki/Covariance}
-	
-	\bibitem{}
-	Wikipedia~: Analyse en composantes principales
-	\\\textit{https://fr.wikipedia.org/wiki/Analyse\_en\_composantes\_principales}
-	
-	\bibitem{}
-	Wikipedia~: Décomposition en valeurs singulières
-	\\\textit{https://fr.wikipedia.org/wiki/Decomposition\_en\_valeurs\_singulieres}
-	\\
-	\underline{Autres :}
-	
-	\bibitem{}
-	ResearchGate~: Article sur les reconnaissances de visages
-	\\\textit{https://www.researchgate.net/publication/303907498\_RECONNAISSANCE\_DE\_VISAGES\_HOMMESFEMMES\_PAR\_LES\_EigenFaces\_et\_les\_SVMs}
-	
-	\bibitem{}
-	Alicem
-	\\\textit{https://www.interieur.gouv.fr/Actualites/L-actu-du-Ministere/Alicem-la-premiere-solution-d-identite-numerique-regalienne-securisee}
-	
-	\bibitem{}
-	Youtube~: Science4All Réseaux de neurones 
-	\\\textit{https://www.youtube.com/watch?v=8qL2lSQd9L8}
-	
-	\bibitem{}
-	ENPC~: Chaines de markov
-	\\\textit{https://cermics.enpc.fr/~delmas/Enseig/mod-stoch.pdf}
-	
-	\bibitem{}
-	Anefian~: Embedded HMM
-	\\\textit{http://www.anefian.com/research/nefian99\_embedded.pdf}
-	
-	\bibitem{}
-	Wikipedia~: Clearview AI
-	\\\textit{https://en.wikipedia.org/wiki/Clearview\_AI}
-	
-	\bibitem{}
-	Apple~: Face ID
-	\\\textit{https://support.apple.com/fr-fr/HT208109}
-	
-	\bibitem{}
-	Archives ouvertes~: reconnaissance visuelle d'un robot
-	\\\textit{https://tel.archives-ouvertes.fr/tel-00758249/document}
+\bibitem{}
+  MIT Press Journal~: Eigenfaces for recognition
+  \\\textit{https://www.mitpressjournals.org/doi/abs/10.1162/jocn.1991.3.1.71}
+  \\
+  \underline{Présentation générale :}
+  
+\bibitem{}
+  Wikipedia~: Eigenface
+  \\\textit{https://en.wikipedia.org/wiki/Eigenface}
+  
+\bibitem{}
+  Scholarpedia~: Eigenface
+  \\\textit{http://www.scholarpedia.org/article/Eigenface}
+  
+\bibitem{}
+  jmcSpot~: EigenFace
+  \\\textit{http://jmcspot.com/Eigenface/}
+  
+  \underline{Algorithme :}
+  
+\bibitem{}
+  Github~: Reconnaissance faciale
+  \\\textit{https://github.com/msilanus/faceReco}
+  
+\bibitem{}
+  Cours IUT BM~: Eigenfaces 
+  \\\textit{http://cours-info.iut-bm.univ-fcomte.fr/wiki/pmwiki.php/TP/EigenFaces}
+  
+\bibitem{}
+  Ecole Supérieur d'ingénieur de Rennes : TP Eigenface
+  \\\textit{TP-ESIR-Eigenface.pdf}
+  \\
+  \underline{Mathématiques :}
+  
+\bibitem{}
+  Wikipedia~: Covariance
+  \\\textit{https://fr.wikipedia.org/wiki/Covariance}
+  
+\bibitem{}
+  Wikipedia~: Analyse en composantes principales
+  \\\textit{https://fr.wikipedia.org/wiki/Analyse\_en\_composantes\_principales}
+  
+\bibitem{}
+  Wikipedia~: Décomposition en valeurs singulières
+  \\\textit{https://fr.wikipedia.org/wiki/Decomposition\_en\_valeurs\_singulieres}
+  \\
+  \underline{Autres :}
+  
+\bibitem{}
+  ResearchGate~: Article sur les reconnaissances de visages
+  \\\textit{https://www.researchgate.net/publication/303907498\_RECONNAISSANCE\_DE\_VISAGES\_HOMMESFEMMES\_PAR\_LES\_EigenFaces\_et\_les\_SVMs}
+  
+\bibitem{}
+  Alicem
+  \\\textit{https://www.interieur.gouv.fr/Actualites/L-actu-du-Ministere/Alicem-la-premiere-solution-d-identite-numerique-regalienne-securisee}
+  
+\bibitem{}
+  Youtube~: Science4All Réseaux de neurones 
+  \\\textit{https://www.youtube.com/watch?v=8qL2lSQd9L8}
+  
+\bibitem{}
+  ENPC~: Chaines de markov
+  \\\textit{https://cermics.enpc.fr/~delmas/Enseig/mod-stoch.pdf}
+  
+\bibitem{}
+  Anefian~: Embedded HMM
+  \\\textit{http://www.anefian.com/research/nefian99\_embedded.pdf}
+  
+\bibitem{}
+  Wikipedia~: Clearview AI
+  \\\textit{https://en.wikipedia.org/wiki/Clearview\_AI}
+  
+\bibitem{}
+  Apple~: Face ID
+  \\\textit{https://support.apple.com/fr-fr/HT208109}
+  
+\bibitem{}
+  Archives ouvertes~: reconnaissance visuelle d'un robot
+  \\\textit{https://tel.archives-ouvertes.fr/tel-00758249/document}
 
 \end{thebibliography}		
 
