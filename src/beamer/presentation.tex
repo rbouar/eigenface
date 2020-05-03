@@ -13,10 +13,7 @@
 % quelques définitions
 \theoremstyle{plain}
 \newtheorem{thm}{Théorème}
-\newtheorem{cor}{Corollaire}
-\newtheorem{lem}{Lemma}
 \newtheorem{prop}{Proposition}
-\newtheorem{dem}{Démonstration}
 
 \theoremstyle{definition}
 \newtheorem{defi}{Définition}
@@ -25,10 +22,12 @@
 
 \DeclareMathOperator\Var{Var}
 \DeclareMathOperator\Cov{Cov}
-\DeclareMathOperator\esp{E}
 
 
-\usetheme{Berlin}
+
+\usetheme{Montpellier}
+\usecolortheme{whale}
+
 
 \title{Reconnaissance faciale par Eigenfaces}
 \author{Bouarah Romain \and Langdorph Matthieu \and Ketels Lucas \and Nathan Souffan }
@@ -42,12 +41,8 @@
 \end{frame}
 
 
-\begin{frame}[shrink]
-  \tableofcontents
-\end{frame}
-
-
 \section{Introduction}
+% LUCAS
 \subsection{Motivation}
 \subsection{Histoire}
 
@@ -60,6 +55,8 @@
     Chaque coefficient représente un niveau de gris d'un pixel.
   \end{defi}
 \end{frame}
+
+
 
 \begin{frame}
   \frametitle{Transformation en un vecteur de $\mathbb{R}^{N \times N}$}
@@ -82,13 +79,14 @@
       \vdots \\
       p_{N,N}
     \end{pmatrix}
-  \]
-  
+  \]  
 \end{frame}
 
 
 
 \subsection{Matrice de covariance}
+
+
 
 \begin{frame}  
   \frametitle{Observation sur les images des visages}
@@ -100,6 +98,7 @@
     Nos images de visages ne sont pas si éloignées les unes des autres. 
   \end{exampleblock}
 \end{frame}
+
 
 
 \begin{frame}
@@ -115,6 +114,7 @@
 \end{frame}
 
 
+
 \begin{frame}
   \frametitle{Encodons cette dispersion}  
   \begin{defi}[Estimation de la Matrice de Covariance]
@@ -127,16 +127,14 @@
 \end{frame}
 
 
+
 \begin{frame}
   \frametitle{Application à notre cas}
   Soit $I = [I_1,I_2,\dotsc,I_M]$ la matrice de l'ensemble de nos images.
-  \pause
   \begin{enumerate}
-  \item On calcule le visage moyen $\Psi = \frac{1}{M}\displaystyle\sum_{i=1}^{M} I_i$.
-    \pause
-  \item Chaque visage différe donc de la moyenne par le vecteur $\Phi_i = I_i - \Psi$.
-    \pause
-  \item On calcule la matrice de covariance
+  \item<2-> On calcule le visage moyen $\Psi = \frac{1}{M}\displaystyle\sum_{i=1}^{M} I_i$.
+  \item<3-> Chaque visage différe donc de la moyenne par le vecteur $\Phi_i = I_i - \Psi$.
+  \item<4-> On calcule la matrice de covariance
     \[
       C = \frac{1}{M} \displaystyle\sum_{i=1}^{M} \Phi_i \Phi_i^T = \frac{1}{M} AA^T 
     \]
@@ -145,23 +143,26 @@
 \end{frame}
 
 
+
 \begin{frame}
   \frametitle{Observations sur la Matrice de Covariance}
   La matrice de covariance $C$ est :
-  \pause
   \begin{itemize}
-  \item symétrique réelle.
-    \pause
-  \item définie semi-positive.
+  \item<2-> symétrique réelle.
+  \item<3-> définie semi-positive.
   \end{itemize}
 \end{frame}
 
+
+
 \subsection{Analyse en composantes principales}
+
+
 
 \begin{frame}
   \frametitle{Introduction à l'Analyse en Composantes Principales}
   \begin{block}{Principe}
-    Transformer des variables liées entre elles en nouvelles variables décorrélées les unes des autres.
+    Trouver des axes décrivant au mieux notre nuage de points.
   \end{block}
   \pause
   \begin{defi}[Eigenfaces]
@@ -169,16 +170,105 @@
   \end{defi}
 \end{frame}
 
+
+
 \begin{frame}
-  \frametitle{Illustration Deux Dimensions}
-  Des graphiques
+  \frametitle{Illustration en 2 Dimensions}
+  \begin{figure}
+    \begin{overprint}
+      \onslide<1>\centering\includegraphics[scale=0.5]{src/beamer/figures/fig_pca_1.png}
+      \onslide<2>\centering\includegraphics[scale=0.5]{src/beamer/figures/fig_pca_2.png}
+      \onslide<3>\centering\includegraphics[scale=0.5]{src/beamer/figures/fig_pca_3.png}
+    \end{overprint}
+  \end{figure}
 \end{frame}
 
+
+
+\begin{frame}
+  \begin{figure}
+    \centering
+    \includegraphics[scale=0.5]{src/beamer/figures/fig_pca_4.png}  
+  \end{figure}
+\end{frame}
+
+
+
+\begin{frame}
+  \frametitle{Limite de la Méthode}
+  \begin{qst}
+    Quels sont les problèmes de la méthode ?
+  \end{qst}
+
+  \pause
+  
+  \begin{exampleblock}{Réponse}
+    \begin{itemize}
+    \item La matrice de covariance est de taille $N^2 \times N^2$.
+      \pause
+    \item La diagonaliser est infaisable informatiquement.
+    \end{itemize}
+  \end{exampleblock}
+\end{frame}
+
+
+
 \subsection{Décomposition en valeurs singulières}
+\begin{frame}
+  \frametitle{\'{E}noncé de la Décomposition en Valeurs Singulières}
+  \begin{thm}
+    Soit $M$ une matrice $m \times n$, alors il existe une décomposition de la forme
+    \[
+      M = U \Sigma V^t
+    \]
+    avec $U$ et $V$ des matrices orthonormales de taille respectives $m \times m$ et $n \times n$.
+  \end{thm}
+  
+  \begin{prop}
+    \begin{itemize}
+    \item les colonnes de $V$ sont les vecteurs propres de $M^TM$
+    \item les colonnes de $U$ sont les vecteurs propres de $MM^T$
+    \end{itemize}
+  \end{prop}
+\end{frame}
+
 
 \section{Classification des visages}
+% NATHAN
 \subsection{Projection dans l'espace des visages}
+\begin{frame}
+  \frametitle{Projection d'un visage}
+  Soit $\Gamma$ une nouvelle image de visage, on la projette dans l'espace des visages par :
+  \[
+    \omega_k = u_k^T(\Gamma - \Psi)
+  \]
+  \pause
+  Pour $k \in \{1,\dotsc,M'\}$, on a alors :
+  \[W =
+    \begin{pmatrix}
+      \omega_1 \\
+      \vdots \\
+      \omega_{M'}
+    \end{pmatrix}
+  \]
+\end{frame}
 \subsection{Analyse de la projection}
+
+
+\begin{frame}
+  \frametitle{Conclusion}
+  \resizebox{\linewidth}{!}{
+    \begin{tabular}{ | l | c | c | }
+      \hline
+                                      & proche d'une classe de visage & éloigné d'une classe de visage \\
+      \hline
+      proche de l'espace des visages  & \onslide<2->{visage connu}    & \onslide<3->{visage inconnu}   \\
+      \hline
+      éloigné de l'espace des visages & \onslide<4->{faux positif}    & \onslide<5->{pas un visage}    \\
+      \hline
+    \end{tabular}
+  }
+\end{frame}
 
 \section{Application}
 \subsection{Techniques utilisées aujourd'hui}
@@ -188,7 +278,7 @@
 \subsection{Risque de la reconnaissance faciale}
 \subsection{Références}
 
-\begin{frame}  
+\begin{frame}
 \end{frame}
 
 \end{document}
