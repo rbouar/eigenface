@@ -41,8 +41,32 @@
 \maketitle
 \newpage
 
-\part{Partie Mathématiques}
+\section*{Introduction}
+L’omniprésence de l’informatique, la puissance des ordinateurs, l’efficacité des algorithmes, ainsi que la facilité d’acquérir des images, par l’intermédiaire de caméras et d’appareils photo, nous permet d’automatiser le processus de reconnaissance d’images, et plus particulièrement de reconnaissance de visages.
+Le recours aux technologies de reconnaissance faciale est, de fait, de plus en plus important dans de nombreux secteurs d’activité, et commence à modifier l’usage que nous faisons de différents appareils, outils et applications.
+Par ailleurs, la reconnaissance faciale est l’objet de nombreuses recherches, à la fois mathématiques et informatiques, ce qui donne lieu à une certaine diversité de techniques et technologies pour aboutir à la reconnaissance effective de visages.
+Nous soulignerons que l’usage de technologies de reconnaissance faciale soulève des enjeux moraux, politiques et économiques, ainsi que des risques et questions quant à nos libertés fondamentales.
+Aussi préciserons-nous qu’une mauvaise connaissance du terme “reconnaissance faciale” et de ce à quoi il fait référence peut conduire à une évaluation erronée des risques et enjeux liés cette technologie, ainsi qu’à une confusion quant aux technologies proches, voisines de la reconnaissance faciale.
+Il est notamment important de faire la distinction entre détection de visages et reconnaissance faciale: cette dernière est une techniques biométrique, c’est-à-dire un ensemble de procédés automatisés permettant de reconnaître un individu à partir de la quantification de ses caractéristiques physiques, physiologiques ou comportementales.
+Nous nous demanderons comment les différentes technologies de reconnaissance faciale ont émergées, et nous nous interrogerons sur les risques et enjeux que soulèvent ces dernières au sein de notre société.
+Pour ce faire, nous étudierons dans un premier temps le développement mathématiques et informatique de la reconnaissance faciale, nous nous pencherons dans un second temps sur les différentes utilisations de cette technologie, pour enfin nous intéresser aux risques et enjeux qu’elle soulève.
 
+\part{Le développement des différentes technologies de reconnaissance faciale}
+
+\section{Introduction à la méthode EigenFace}
+La recherche et les premières méthodes significatives de reconnaissance faciale se développent surtout à partir des années 90.
+L’augmentation de la puissance de calcul des ordinateurs permet notamment l’utilisation de méthodes statistiques et d’apprentissage plus complexes et sur de plus gros volumes de données, permettant un net gain de performance.
+C'est ainsi qu'apparaît une méthode de reconnaissance de visages basées sur les eigenfaces.
+Aussi préciserons-nous que "eigenface" est le nom donné à un ensemble de vecteurs propres utilisés dans le contexte de reconnaissance faciale.
+Cette approche a l'avantage de traiter le problème de reconnaissance faciale uniquement grâce à des images en deux dimensions, sans avoir recours à une géométrie à trois dimensions.
+La méthode eigenface commence avec le concept d'espace des images: une image en deux dimensions peut être vue comme un point, ou un vecteur, dans un espace de grande dimension, appelé espace des images.
+Par exemple, une image comprenant 32 lignes et 32 colonnes décrit un point dans un espace d'image à 1024 dimensions.
+De manière générale, une image comprenant $l$ lignes et $c$ colonnes décrit un point dans un espace à $N = rc$ dimensions.
+L'idée de cette méthode est de déterminer un ensemble vecteurs propres d'une matrice de covariance, calculée à partir d'un ensemble d'images de visage (ensemble d'entraînement ou training set), de sorte que n'importe quel visage de l'ensemble de départ puisse être reconstitué à partir d'une combinaison linéaire des vecteurs propres (appelés eigenfaces) précedemment calculés.
+Ces eigenfaces nous permettent, de fait, de définir un espace des images.
+Une fois les eigenfaces calculés, il nous est possible d'effectuer une détection de visage, ainsi qu'une reconnaissance faciale.
+En particulier, il suffit de projeter un vecteur image sur l'espace des visages (défini à partir des eigenfaces) et de calculer la distance euclidienne qui le sépare de sa projection.
+Si cette distance dépasse un certain seuil, on considère que l'image ne figure pas un visage. A l'inverse, si cette distance est inférieure à ce seuil, l'image est bien celle d'un visage. 
 
 \section{Calcul des Eigenfaces}
 
@@ -215,12 +239,7 @@ Il y a finalement 4 possibilités pour une image:
   \item L'image est distante de l'espace des images et également distante de toutes les classes de visages, on peut alors en conlcure que ce n'est pas un visage.
 \end{enumerate}
 
-
-
-
-\newpage
-\part{Partie pratique}
-\section{Autres techniques utilisés pour la reconnaissance faciale}
+\section{Intelligence artificielle, machine learning: les solutions actuelles pour une reconnaissance faciale plus efficace}
 La reconnaissance faciale par les Eigenfaces n'est pas forcément la technique la plus utilisée. D'autres techniques sont utilisés dans le domaine de la reconnaissance faciale et visuelle. Notamment on va voir qu'il y a le \textit{ Embedded Hidden Markov Model}(Embedded HMM) et les réseaux neuronaux convolutifs.
 \subsection{Embedded HMM}
 En français, nous parlons de modèle de Markov caché, ou encore de automate de Markov à états cachés. Nous sommes dans le cadre des probabilités conditionnelles ici. Cette technique est plus utilisé pour de la reconnaissance visuelle, reconnaître des formes, des objets.
@@ -242,28 +261,90 @@ Chaque neurone du réseau analysera une matrice de convolution en fonction du pi
 Ainsi sont identifié les éléments d'une image, ou un visage sur une image amenant à la reconnaissance faciale.
 Ces réseaux de convolutions sont aussi utiles dans la compréhension de texte, en médecine, et même pour le jeu de go(soit lorsqu'il il y a une partielle corrélation globale, relative invariance spatiale ou temporelle(vidéo)).
 
-\newpage
-\section{Applications de reconnaissances faciales par toutes les techniques vues}
-Il existe de nombreuses applications traitant de la reconnaissance faciale. On peut en trouver pour l'industrie, pour de la recherche, pour un particulier ou pour un organisme plus grand.
-Par sécurité, on peut équiper notre maison d'un système de vidéo-surveillance, pour se protéger d'éventuels intrusions d'individus dans celle-ci.
-Supposons que cela se passe, le propriétaire aura alors accès à une banque d'image des individus. Il pourra alors les faire analyser par la police pour trouver les coupables.
-La reconnaissance faciale peut également être utile comme droit d'entrer dans une entreprise, ou via une reconnaissance de l'iris, au même niveau que la reconnaissance digitale ou vocale.
-La reconnaissance faciale est donc très utile dans la sécurité.
-\subsection{Reconnaissance faciale sur smartphone}
-L'évolution des appareils électroniques est exponentielle depuis plusieurs années, et les nouveaux smartphones sont à la pointe de la technologie. Ils sont équipés d'un système de sécurité de reconnaissance faciale. Le propriétaire du téléphone peut déverrouiller celui-ci en le tenant naturellement, objectifs de l'appareil photo facial orienté vers son visage. Il sera également possible de faire des achats par son téléphone par reconnaissance faciale. Tout le travail de la confection de ce système est d'empêcher le système de se faire duper par une photo, masque, etc... Il est donc intéressant d'avoir un système de reconnaissance faciale 3D, pour optimiser la sécurité, sans compter la reconnaissance vocale et digitale pouvant l'accompagner.
-Par exemple Apple a ajouté ce système sur son Iphone X, le "Face ID", ici nous sommes dans le cas de la reconnaissance faciale 3D. Pour l'utiliser il suffit juste d'enregistrer des images de son visage lors de la configuration des paramètres de l'appareil. Le système vise à la sécurité de l'utilisateur, et en fluidifiant son utilisation du smartphone. Le système est très robuste, et il paraît très compliqué de le berner.
-\subsection{Des robots intelligents dans l'industrie}
-Dans le milieu de l'industrie, plutôt que de parler de reconnaissance faciale, on aura tendance à parler de reconnaissance visuelle. Diverses entreprises utilisent dans leurs usines des robots pour vérifier que leurs produits n'ont pas de défauts de fabrication. Pour cela il faut apprendre au robot à reconnaître des objets visuels, et lui faire associer aussi des mots, afin qu'il explicite les éventuels défauts. Par exemple, Spot est un robot quadrupède travaillant dans une entreprise norvégienne(Aker BP, entreprise pétrolière), son rôle au sein de l'entreprise est d'inspecter les produits, enregistrer des données puis transmettre des rapports. La phase d'inspection est donc celle ou l'utilisation de la reconnaissance visuelle est utiliser, pour récupérer ainsi des données et transmettre ses rapports.
-La reconnaissance faciale/visuelle est également utilisé dans le milieu du transport. Les caméras de reculs peuvent être équipés d'un système intelligent pouvant trouver au mieux la trajectoire de la voiture et les obstacles.
-Les voitures autonomes sont équipés d'un système de lasers, mais aussi de caméras, pour modéliser l'environnement dans laquelle l'automobile se trouve en trois dimensions, et pour identifier les éléments le composant(piétons, panneaux de signalisation, poteaux, voitures). A partir de cela, des commandes sont lancés par un système d'intelligence artificielle, pour que la voiture agisse comme il le faut.
-\subsection{Des enjeux politiques}
-La démocratisation de la reconnaissance faciale dans la vie sociétale d'un pays implique un choix de société. C'est pourquoi le débat de l'utilisation de la reconnaissance faciale à des fins nationales ou plus larges encore doit être connu par tous. "Sécurité ou liberté ?" c'est ce dont parlent des lobbyistes de la reconnaissance faciale. Mais peut-on être libre sans sécurité? Une telle sécurité serait-elle un frein à notre liberté?
-Certains aspect de l'utilisation par reconnaissance faciale lors d'évènements par exemple pour cibler certains individus etc... peut poser des problèmes d'un point de vue éthique.
-Même si d'un point de vue sécurité cela peut être une grande avancée, cela amènerait à une atteinte à l'anonymat dans l'espace public. Une personne ne pourrait plus se déplacer anonymement dans sa vie quotidienne quand il se déplace dans des espaces publics. Cela toucherait donc à l'anonymat et l'intimité de tous. C'est pourquoi il est important de discuter de cela en société pour ne pas s'embarquer dans quelque chose sans en connaître les bienfaits et les risques, comme l'explique bien le CNIL.
-Nous pouvons voir qu'un moteur de recherche russe propose dans la section Images de ses recherches de trouver les images similaires à une image que l'on veut, en réponse on peut avoir la fiche de la personne si elle est connue, des animaux similaires si c'en est un, etc..
-Ce genre de méthode serait également utilisé par les services de défense et protection américaine. Ils utiliseraient le site Clearview.ia, inaccessible au public. Sur ce site, on peut rentrer la photo de n'importe qui, et avoir ses réseaux sociaux, ses photos de ses réseaux et autres, son identité. Ce genre d'utilisation mène à poser des questions. Cela peut faire peur. De plus, sont développés pour les lunettes connectés ce genre de système, ce qui pourrait être vraiment inquiétant, mais serait une véritable prouesse technique.
-La France veut être dans la course aussi, et développe par Thalès, une application de reconnaissance faciale pour les pièces d'identité, Alicem.
 
+\newpage
+
+\part{Les différentes utilisations des technologies de reconnaissance faciale}
+
+Le procédé de reconnaissance faciale s'organise en deux temps: la collecte du visage et un "gabarit", c'est-à-dire un modèle représentant,
+d'un point de vue informatique, les caractéristiques de ce visage, puis la reconnaissance de visage par comparaison du gabarit correspondant avec un ou plusieurs autres gabarits.
+
+\section{Les besoins auxquels répondent les technologies de reconnaissance faciale}
+Comme tout procédé biométrique, la reconnaissance faciale remplit deux fonctions.
+
+\subsection{Authentification}
+Premièrement, cette technologie permet l’authentification d’une personne, qui vise à vérifier qu’une personne est bien celle qu’elle prétend être. Dans ce cas, le système va comparer un gabarit biométrique préenregistré avec un seul visage, par exemple celui d’une personne qui se présente à un point de contrôle, afin de vérifier si cette personne est la même.
+Cette fonctionnalité repose donc sur la comparaison de deux gabarits. 
+
+\subsection{Identification}
+Deuxièmement, elle permet l’identification d’une personne, qui vise à retrouver une personne au sein d’un groupe d’individus, dans un lieu, une image ou une base de données.
+Dans ce cas, le système doit effectuer un test sur chaque visage capté pour générer un gabarit biométrique et vérifier si celui-ci correspond à une personne connue du système.
+Cette fonctionnalité repose ainsi sur la comparaison d’un gabarit avec une base de données de gabarits.
+Par exemple, elle permet de lier un « état civil » (nom, prénom) à un visage, si la comparaison est faite avec une base de photographies associées à un nom et un prénom.
+Elle peut aussi consister à suivre la trajectoire d’une personne dans une foule, sans nécessairement faire le lien avec l’état civil de la personne.
+
+\section{Les secteurs dans lesquels la reconnaissance faciale est utilisée}
+La reconnaissance faciale peut poursuivre des finalités très diverses, aussi bien commerciales que liées à la sécurité publique.
+Elle peut s’inscrire dans des lieux très différents : dans la relation personnelle entre un utilisateur et un service, pour l’accès à un endroit spécifique, ou sans limitation particulière dans l’espace public (reconnaissance faciale « à la volée »).
+
+\bigskip
+
+Certains usages de la reconnaissance faciale sont placés sous le contrôle total des utilisateurs.
+C'est le cas de l'authentification pour accéder, à différents services ou applications, qui se fait dans un cadre purement domestique.
+Nous pourrions notamment citer l'exemple des smartphones, largement répandus: le propriétaire d'un téléphone peut dévérouiller celui-ci en le tenant naturellement, la caméra faciale étant orientée vers son visage.
+Enfin, de manière générale, l'authentification par reconnaissance faciale est massivement utilisée, en substitution de l’authentification par mot de passe, par les détenteurs d’ordiphones pour déverrouiller leur appareil.
+
+L’authentification peut aussi être utilisée aux fins de contrôle d’accès physique à un ou plusieurs lieux prédéterminés, par exemple à l’entrée de bâtiments ou à des points de passage particuliers.
+Cette fonctionnalité est ainsi mise en œuvre dans le cadre du traitement PARAFE de passage aux frontières,
+où la photographie de la personne se présentant au dispositif de contrôle est comparée avec celle contenue dans son titre d’identité (passeport ou titre de séjour sécurisé).
+
+
+\bigskip
+
+L’identification peut donner lieu à des applications nombreuses et plus diverses.
+On peut notamment citer les cas d’usages suivants, constatés ou envisagés en France ou ailleurs en Europe :
+\begin{itemize}
+\item la reconnaissance automatique de personnes présentes sur une image aux fins d’identifier par exemple ses relations sur un réseau social,
+  à l’instar de Facebook qui l’utilise, par comparaison entre l’image et les gabarits de toutes les personnes présentes sur le réseau ayant consenti à cette fonctionnalité, pour suggérer l’identification nominative de ces relations;
+\item l’accès à des services, certains distributeurs de billets reconnaissant leurs clients, par comparaison entre un visage capté par une caméra et la base de données de visages détenue par la banque;
+\item le suivi du parcours d’un passager d’un service de transport à toutes les étapes de ce parcours,
+  par comparaison entre le gabarit calculé en temps réel de toute personne se présentant à des portiques présents à certaines étapes du parcours (déposes bagages, portiques d’embarquement, etc. )
+  et les gabarits des personnes enrôlées au préalable au sein du dispositif;
+\item la recherche, dans une base de données comportant des photographies, de l’état civil d’une personne (victime, suspecte, etc. ) non identifiée, ainsi que le permet par exemple en France le traitement TAJ (Traitement des antécédents judiciaires);
+\item le suivi des déplacements d’une personne dans l’espace public, par comparaison entre son visage et les gabarits biométriques des personnes circulant ou ayant circulé dans la zone surveillée,
+  par exemple en cas d’oubli d’un bagage ou à la suite de la commission d’un délit;
+\item la reconstitution du parcours d’une personne et de ses interactions successives avec des personnes tierces, par une comparaison des mêmes éléments mais réalisée en différé, pour identifier ses contacts par exemple;
+\item l’identification sur la voie publique de personnes recherchées, par confrontation en temps réel de tous les visages captés à la volée par des caméras  de vidéoprotection et une base de données détenue par les forces de l’ordre.
+\end{itemize}
+
+
+\part{Les enjeux de la reconnaissance faciale}
+
+\section{Les risques de cette technologie}
+
+À la différence de toute autre donnée à caractère personnel, la donnée biométrique n’est pas attribuée par un tiers ni même choisie par la personne : elle est produite par le corps lui-même et le désigne ou le représente, lui et nul autre, de façon immuable.
+Contrairement à un mot de passe ou un identifiant, elle ne peut dès lors être modifiée en cas de compromission (perte, intrusion dans le système, etc.) : elle est non révocable.
+Tout détournement ou mauvais usage de cette donnée fait ainsi peser des risques substantiels sur la personne dont elle émane : privation de ses accès à des services ou à des lieux, usurpation de son identité à des fins d’escroquerie, voire criminelles, etc.
+
+La reconnaissance faciale, tout comme les autres techniques biométriques, n’est donc jamais un traitement tout à fait anodin.
+Même un usage légitime et bien cadré peut, en cas de cyberattaque, de compromission ou d’erreur, entraîner des conséquences particulièrement graves.
+Dans ce contexte, la question de la sécurisation des données biométriques est essentielle et doit être une priorité impérieuse dans la conception de tout projet de cette nature.
+Le stockage des données biométriques sur un support individuel détenu par l’utilisateur, à la main de ce dernier, doit toujours être privilégié aux solutions de stockage en base centrale, afin de minimiser les risques encourus.
+Ce n’est qu’en cas d’absolue nécessité, en l’absence de toute alternative, qu’un stockage centralisé peut être 
+envisagé, sous réserve de strictes mesures de sécurité.
+
+\section{La nécessité de définir les restrictions de l'utilisation de cette technologie}
+
+A ECRIRE
+
+\section*{Conclusion}
+Les eigenfaces constituent une méthode de reconnaissance faciale simple et peu chère en ressource en ce sens que son processus d'entraînement est automatique et facile à développer,
+elle réduit la complexité de la représentation d'une image de visage (Eigenface n'exige pas d'informations en trois dimensions), et enfin, cette méthode est capable de gérer d'importantes bases de données.
+
+En revanche, Eigenface est très sensible aux changements de luminosité, de taille des images et des visages, et est incapable de reconnaître des expressions faciales.
+De fait, aujourd'hui, les technologies intégrant un sytème de reconnaissance faciale n'ont pas recourt à la méthode des eigenfaces.
+
+\newpage
 \newpage
 \begin{thebibliography}{18}
 \bibitem{}
