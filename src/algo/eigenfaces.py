@@ -2,9 +2,10 @@ import cv2
 import os
 import numpy as np
 import sys
+from colorama import Style, Fore
 
-threshold_is_face = 0.5
-threshold_is_known_face = 0.1
+threshold_is_face = 4000
+threshold_is_known_face = 5000
 datadir = "yale_dataset/"
 out_dir = "output/"
 
@@ -87,9 +88,17 @@ def nearest(proj_face, face_class):
 
 def result(proj_face, face_class, facespace_dist):
     nearest_class, norm = nearest(proj_face, face_class)
-    print("Distance par rapport à l'espace des images: " + str(facespace_dist))
-    print("Personne la plus proche: " + str(nearest_class) + " avec une distance de " + str(norm))
 
+    print("Distance par rapport à l'espace des images: " + str(facespace_dist))
+    if facespace_dist <= threshold_is_face:
+        print(Fore.GREEN + "L'image est un visgae!" + Style.RESET_ALL);
+    else :
+        print(Fore.RED + "L'image n'est pas un visgae" + Style.RESET_ALL)
+    print("Personne la plus proche de l'image: " + str(nearest_class) + " avec une distance de " + str(norm))
+    if (facespace_dist <= threshold_is_face and norm <= threshold_is_known_face):
+        print(Fore.GREEN + "Visage reconnue! L'image est le visage de " + str(nearest_class) + Style.RESET_ALL)
+    if facespace_dist <= threshold_is_face and norm > threshold_is_known_face:
+        print(Fore.RED + "Visage inconnue" + Style.RESET_ALL)
 
 def main():
     create_output_dir()
