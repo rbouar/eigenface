@@ -41,10 +41,10 @@
 \end{frame}
 
 
-\section{Introduction}
-% LUCAS
-\subsection{Motivation}
-\subsection{Histoire}
+% \section{Introduction}
+% % LUCAS
+% \subsection{Motivation}
+% \subsection{Histoire}
 
 \section{Calcul des eigenfaces}
 \subsection{Travail dans $\mathbb{R}^{N \times N}$}
@@ -171,14 +171,23 @@
 \end{frame}
 
 
+% [[0.547824   0.07046611]
+%  [0.07046611 0.12358077]]
+
+%  [[ 0.98716928  0.15967719]
+%  [-0.15967719  0.98716928]]
+
+%  [[0.54524152]
+%  [0.10937813]]
+
+
 
 \begin{frame}
   \frametitle{Illustration en 2 Dimensions}
   \begin{figure}
     \begin{overprint}
       \onslide<1>\centering\includegraphics[scale=0.5]{src/beamer/figures/fig_pca_1.png}
-      \onslide<2>\centering\includegraphics[scale=0.5]{src/beamer/figures/fig_pca_2.png}
-      \onslide<3>\centering\includegraphics[scale=0.5]{src/beamer/figures/fig_pca_3.png}
+      \onslide<2>\centering\includegraphics[scale=0.5]{src/beamer/figures/fig_pca_3.png}
     \end{overprint}
   \end{figure}
 \end{frame}
@@ -187,8 +196,40 @@
 
 \begin{frame}
   \begin{figure}
-    \centering
-    \includegraphics[scale=0.5]{src/beamer/figures/fig_pca_4.png}  
+    \frametitle{Lien avec la Matrice de Covariance}
+    \begin{columns}
+      \column{0.5\textwidth}
+      \begin{align*}
+        \onslide<1->{
+        C &= 
+            \begin{pmatrix}
+              0.55 & 0.07\\
+              0.07 & 0.12
+            \end{pmatrix}                     
+        \\}
+        \onslide<2->{
+          &= P
+            \begin{pmatrix}
+              0.55 & 0\\
+              0    & 0.11
+            \end{pmatrix}                     
+                     P^T
+                     }
+      \end{align*}
+      \onslide<2->{avec
+      \[
+        P =
+        \begin{pmatrix}
+          0.99 & -0.16\\
+          0.16 & 0.99
+        \end{pmatrix}
+      \]}
+      \column{0.5\textwidth}
+      \begin{overprint}
+        \onslide<1>\centering\includegraphics[scale=0.5]{src/beamer/figures/fig_pca_1.png}
+        \onslide<2>\centering\includegraphics[scale=0.5]{src/beamer/figures/fig_pca_4.png}          
+      \end{overprint}
+    \end{columns}
   \end{figure}
 \end{frame}
 

@@ -18,13 +18,19 @@ plt.axis([0, 5, 0, 5])
 plt.scatter(x, y, marker='.', color='b')
 plt.savefig('fig_pca_1.png', bbox_inches='tight')
 
-
-
-# ACP
+# COV
 points = np.column_stack((x,y))
 print("points : ",points.shape)
 
+cov = np.cov(points.T)
+print(cov)
+
+# ACP
 mean, eigenvectors, eigenvalues = cv.PCACompute2(points, np.mean(points, axis=0).reshape(1,-1))
+
+print(eigenvectors)
+
+print(eigenvalues)
 
 plt.quiver( 2*[mean[0][0]], 2*[mean[0][1]], eigenvectors[:,0], eigenvectors[:,1], angles='xy', scale_units='xy', scale=2.5, color='r')
 plt.savefig('fig_pca_4.png', bbox_inches='tight')
