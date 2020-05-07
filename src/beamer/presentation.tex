@@ -11,6 +11,8 @@
 
 \usepackage{tikz}
 
+\usepackage{wrapfig}
+
 % quelques définitions
 \theoremstyle{plain}
 \newtheorem{thm}{Théorème}
@@ -127,19 +129,29 @@
 
 
 
-\begin{frame}
+\begin{frame}<1-2>[label=calcul]
   \frametitle{Application à notre cas}
   Soit $I = [I_1,I_2,\dotsc,I_M]$ la matrice de l'ensemble de nos images.
   \begin{enumerate}
-  \item<2-> On calcule le visage moyen $\Psi = \frac{1}{M}\displaystyle\sum_{i=1}^{M} I_i$.
+  \item<2-> On calcule le visage moyen $\Psi = \frac{1}{M}\displaystyle\sum_{i=1}^{M} I_i$.        
   \item<3-> Chaque visage différe donc de la moyenne par le vecteur $\Phi_i = I_i - \Psi$.
   \item<4-> On calcule la matrice de covariance
     \[
       C = \frac{1}{M} \displaystyle\sum_{i=1}^{M} \Phi_i \Phi_i^T = \frac{1}{M} AA^T 
     \]
-    où $A = [\Phi_1,\Phi_2,\dotsc,\Phi_M]$.    
+    où $A = [\Phi_1,\Phi_2,\dotsc,\Phi_M]$.
   \end{enumerate}
 \end{frame}
+
+\begin{frame}
+  \frametitle{Visage Moyen}
+  \begin{figure}
+    \includegraphics{src/beamer/figures/mean.jpg}
+  \end{figure}
+\end{frame}
+
+\againframe<3->{calcul}
+
 
 
 
@@ -155,9 +167,6 @@
 
 
 \subsection{Analyse en composantes principales}
-
-
-
 \begin{frame}
   \frametitle{Introduction à l'Analyse en Composantes Principales}
   \begin{block}{Principe}
@@ -178,7 +187,6 @@
 
 %  [[0.54524152]
 %  [0.10937813]]
-
 
 
 \begin{frame}
@@ -337,7 +345,7 @@
   }
 
   \only<2>{
-    \centering\scalebox{0.28}{\input{src/beamer/figures/fig_conv_2.tikz}}
+    \centering\scalebox{0.25}{\input{src/beamer/figures/fig_conv_2.tikz}}
   }
   
 \end{frame}
