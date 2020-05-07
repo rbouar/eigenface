@@ -5,6 +5,8 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 
+\usepackage{url}
+
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
@@ -329,13 +331,13 @@
 
   \pause
 
-  %\begin{center}
-    \begin{tabular}{cccc}
+  \resizebox{\linewidth}{!}{
+    \begin{tabular}{c c r r}
       image d'origine & image reconstruite & distance/l'EDV & distance/VLPP\\
-      \includegraphics[scale=0.25]{src/beamer/figures/s1.jpg} & \includegraphics[scale=0.25]{src/beamer/figures/s1_proj.jpg} & 1210 & 4630 \\[1ex]
-      \onslide<3->{\includegraphics[scale=0.25]{src/beamer/figures/not_a_face.jpg} & \includegraphics[scale=0.25]{src/beamer/figures/not_a_face_proj.jpg} & 8088 & 6828}
+      \includegraphics[scale=0.4]{src/beamer/figures/s1.jpg} & \includegraphics[scale=0.4]{src/beamer/figures/s1_proj.jpg} & 1210 & 4630 \\[1ex]
+      \onslide<3->{\includegraphics[scale=0.4]{src/beamer/figures/not_a_face.jpg} & \includegraphics[scale=0.4]{src/beamer/figures/not_a_face_proj.jpg} & 8088 & 6828}
     \end{tabular}    
-  %\end{center}
+  }
 \end{frame}
 
 
@@ -412,13 +414,31 @@
 
 
 \section{Conclusion}
-\begin{frame}
-\end{frame}
-
-
-
 \subsection{Références}
-\begin{frame}  
+\begin{frame}
+  \begin{thebibliography}{1}
+  \bibitem{eigfac}
+    Turk, Matthew and Pentland, Alex,
+    \textit{Eigenfaces for Recognition},
+    Journal of Cognitive Neuroscience,
+    1991,
+    \url{https://doi.org/10.1162/jocn.1991.3.1.71}
+
+  \bibitem{cov}
+    \textit{Covariance},
+    Wikipédia, l'encyclopédie libre,
+    \url{https://fr.wikipedia.org/w/index.php?title=Covariance&oldid=169222335}
+
+  \bibitem{acp}
+    \textit{Analyse en composantes principales},
+    Wikipédia, l'encyclopédie libre,
+    \url{https://fr.wikipedia.org/w/index.php?title=Analyse_en_composantes_principales&oldid=168590115}
+    
+  \bibitem{dvs}
+    \textit{Décomposition en valeurs singulières},
+    Wikipédia, l'encyclopédie libre,
+    \url{https://fr.wikipedia.org/w/index.php?title=D\%C3\%A9composition_en_valeurs_singuli\%C3\%A8res&oldid=169733819}
+  \end{thebibliography}
 \end{frame}
 
 \end{document}
