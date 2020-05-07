@@ -310,12 +310,32 @@
 \end{frame}
 
 
+%
+% Distance par rapport à l'espace des images: 1210.040843059032
+% L'image est un visgae!
+% Personne la plus proche de l'image: s1 avec une distance de 4630.580074331467
+% Visage reconnue! L'image est le visage de s1
+
+% Distance par rapport à l'espace des images: 8088.196471211084
+% L'image n'est pas un visgae
+% Personne la plus proche de l'image: s1 avec une distance de 6828.859898237381
+
 
 \subsection{Analyse de la projection}
 \begin{frame}
   \[
-    \text{image reconstruite} = U \cdot \Gamma + \Psi
+    \text{image reconstruite} = U \cdot W + \Psi
   \]
+
+  \pause
+
+  %\begin{center}
+    \begin{tabular}{cccc}
+      image d'origine & image reconstruite & distance/l'EDV & distance/VLPP\\
+      \includegraphics[scale=0.25]{src/beamer/figures/s1.jpg} & \includegraphics[scale=0.25]{src/beamer/figures/s1_proj.jpg} & 1210 & 4630 \\[1ex]
+      \onslide<3->{\includegraphics[scale=0.25]{src/beamer/figures/not_a_face.jpg} & \includegraphics[scale=0.25]{src/beamer/figures/not_a_face_proj.jpg} & 8088 & 6828}
+    \end{tabular}    
+  %\end{center}
 \end{frame}
 
 
@@ -325,7 +345,7 @@
   \resizebox{\linewidth}{!}{
     \begin{tabular}{ | l | c | c | }
       \hline
-                                      & proche d'une classe de visage & éloigné d'une classe de visage \\
+                                      & proche d'une classe de visage & éloigné des classes de visage  \\
       \hline
       proche de l'espace des visages  & \onslide<2->{visage connu}    & \onslide<3->{visage inconnu}   \\
       \hline
@@ -380,8 +400,7 @@
   Identification :
   \begin{itemize}
   \item <2-> Facebook avec les suggestions.
-  \item <4-> Traitement des antécédents judiciaires.
-  \item <5-> Sécurité sur la voie publique.
+  \item <4-> Sécurité sur la voie publique.
   \end{itemize}
 
   Authentification :
@@ -394,7 +413,6 @@
 
 \section{Conclusion}
 \begin{frame}
-  \frametitle{Conclusion}
 \end{frame}
 
 
