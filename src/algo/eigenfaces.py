@@ -7,7 +7,7 @@ from colorama import Style, Fore
 threshold_is_face = 4000
 threshold_is_known_face = 5000
 datadir = "yale_dataset/"
-out_dir = "output/"
+out_dir = "target/"
 
 def input_image():
     if len(sys.argv) < 2:
