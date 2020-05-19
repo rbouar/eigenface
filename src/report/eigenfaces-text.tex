@@ -195,7 +195,7 @@ On appelle ainsi valeur singulière de $M$ toute racine carrée d'une valeur pro
 $$ M^t u = \lambda v \text{ et } Mv = \lambda u$$
 
 Dans le cas d'une matrice carrée symétrique définie semi-positive (ce qui est le cas ici pour $C$) les valeurs singulières et vecteurs singuliers correspondent aux valeurs propres et vecteurs propres de M.
-De plus les colonnes de $V$ sont les vecteurs propres de $M^tM$ et les colonnes de $U$ sont les vecteurs propre de $MM^t$. Cela vous nous aider dans notre cas car si on prend $M$ notre matrice ayant comme colonnes les images vectorisé, alors $MM^t$ correspond à la matrice de covariance recherché (en multipliant par une constante ce qui ne change rien au vecteur propre). Ainsi on peut avoir les vecteur propres de la matrice de covariance sans la calculé (ce qui est très important car ce calcul peut être très long avec une matrice qui devient énorme). 
+De plus les colonnes de $V$ sont les vecteurs propres de $M^tM$ et les colonnes de $U$ sont les vecteurs propre de $MM^t$. Cela va nous aider dans notre cas car si on prend $M$ notre matrice ayant comme colonnes les images vectorisé, alors $MM^t$ correspond à la matrice de covariance recherché (en multipliant par une constante ce qui ne change rien au vecteur propre). Ainsi on peut avoir les vecteur propres de la matrice de covariance sans la calculé (ce qui est très important car ce calcul peut être très long avec une matrice qui devient énorme). 
 
 
 Il existe plusieurs façon de calculer une décomposition en valeurs singulière. Un algorithme courant consiste en:
