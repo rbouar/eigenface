@@ -4,7 +4,7 @@ Ce travail nous est demandé dans le cadre de l'UE : [Projet de Mathématique](h
 
 # Devoirs
 ## Jusqu'au 31/01: choix des groupes
-Constituer des groupes de 3 ou 4 personnes puis m'écrire à malod@math.univ-paris-diderot.fr avec pour chaque personne du groupe: Nom, prénom, numéro étudiant, filière (Math ou Math-Info), adresse email.
+Constituer des groupes de 3 ou 4 personnes puis m'écrire à ! avec pour chaque personne du groupe: Nom, prénom, numéro étudiant, filière (Math ou Math-Info), adresse email.
 Vous recevrez un numéro de groupe en retour. M'écrire rapidement si vous n'avez pas intégré de groupe.
 
 ## Jusqu'au 14/02: choix des sujets
